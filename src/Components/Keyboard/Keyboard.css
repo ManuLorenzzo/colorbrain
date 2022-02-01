@@ -1,0 +1,15 @@
+.keyboard {
+  background: white;
+  padding: 0.5rem;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 10%;
+  background: #6d748f;
+  border-top: 0.15rem solid var(--gray-color);
+
+  overflow-x: auto;
+  position: absolute;
+  bottom: 0;
+}
