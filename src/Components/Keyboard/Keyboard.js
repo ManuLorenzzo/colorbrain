@@ -3,16 +3,19 @@ import colors from '../../Config/colors.json'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
 
-export default function Keyboard({ bubblesLength, setColor }) {
+export default function Keyboard({ bubblesLength, setColor, finished }) {
   bubblesLength ||= 0
   return (
     <div className="keyboard">
       {bubblesLength &&
         colors &&
-        colors.length &&
-        [...Array(bubblesLength)].map((el, i) => {
-          return <Bubble color={colors[i]?.hex} onClick={() => setColor(colors[i].id)} />
-        })}
+        !finished &&
+        colors
+          .filter(elem => elem.active)
+          .map((elem, i) => {
+            return <Bubble color={elem.hex} onClick={() => setColor(elem.id)} />
+          })}
+      {finished && <div className="keyboard__submit">✔</div>}
     </div>
   )
 }

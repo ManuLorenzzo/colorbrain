@@ -1,18 +1,22 @@
 [
   {
     "id": 1,
-    "hex": "#78e6a2"
+    "hex": "#78e6a2",
+    "active": true
   },
   {
     "id": 2,
-    "hex": "rgb(85, 191, 240)"
+    "hex": "rgb(85, 191, 240)",
+    "active": true
   },
   {
     "id": 3,
-    "hex": "rgb(255,105,97)"
+    "hex": "rgb(255,105,97)",
+    "active": true
   },
   {
     "id": 4,
-    "hex": "rgb(253,253,150)"
+    "hex": "rgb(253,253,150)",
+    "active": true
   }
 ]

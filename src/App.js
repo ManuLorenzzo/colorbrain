@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Keyboard from './Components/Keyboard/Keyboard'
+import Result from './Components/Result/Result'
 import Sequence from './Components/Sequence/Sequence'
 
 function App() {
   const bubblesLength = 4
   const [values, setValues] = useState([...Array(bubblesLength).fill(null)])
   const [selectedBubble, setSelectedBubble] = useState(0)
+  const [finished, setFinished] = useState(false)
+  const solution = [1, 1, 3, 4]
 
   const changeValue = (i, newValue) => {
     console.log('Cambio valor de burbuja', i, ' ', newValue)
@@ -32,7 +35,6 @@ function App() {
       if (i >= bubblesLength)
         throw new Error('La burbuja seleccionada tiene un índice mayor que la longitud del array')
       setSelectedBubble(i)
-      //changeValue(i, null)
     } catch (err) {
       console.error(err)
     }
@@ -56,12 +58,18 @@ function App() {
       nextBubbleIndex && focusBubble(nextBubbleIndex)
     }
   }
+  useEffect(() => {
+    setFinished(Boolean(!values.some(elem => elem == null) && !selectedBubble))
+  }, [values, selectedBubble])
 
   console.log(values)
   return (
     <div className="colorset">
-      <Sequence values={values} focusBubble={focusBubble} selectedBubble={selectedBubble} />
-      <Keyboard bubblesLength={bubblesLength} setColor={setColor} />
+      <div className="row">
+        <Sequence values={values} focusBubble={focusBubble} selectedBubble={selectedBubble} />
+        <Result solution={solution} values={values} isSubmitted={false} />
+      </div>
+      <Keyboard bubblesLength={bubblesLength} setColor={setColor} finished={finished} />
     </div>
   )
 }
