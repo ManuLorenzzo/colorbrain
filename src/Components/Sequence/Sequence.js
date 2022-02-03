@@ -3,7 +3,7 @@ import Bubble from '../Bubble/Bubble'
 import colors from '../../Config/colors.json'
 import './Sequence.css'
 
-export default function Sequence({ values, focusBubble, selectedBubble }) {
+export default function Sequence({ values, editable = true, focusBubble, selectedBubble }) {
   console.log(selectedBubble)
   return (
     <div className="sequence">
@@ -15,8 +15,8 @@ export default function Sequence({ values, focusBubble, selectedBubble }) {
           const getHex = () => colors.find(elem => elem.id === value)?.hex || null
           return (
             <Bubble
-              color={selectedBubble === i ? '#fff' : getHex()}
-              onClick={() => focusBubble(i)}
+              color={selectedBubble === i && editable ? '#fff' : getHex()}
+              onClick={() => editable && focusBubble(i)}
             />
           )
         })}

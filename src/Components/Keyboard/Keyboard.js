@@ -3,10 +3,10 @@ import colors from '../../Config/colors.json'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
 
-export default function Keyboard({ bubblesLength, setColor, finished }) {
+export default function Keyboard({ bubblesLength, setColor, finished, handleSubmit }) {
   bubblesLength ||= 0
   return (
-    <div className="keyboard">
+    <div className="keyboard" onClick={finished ? handleSubmit : () => {}}>
       {bubblesLength &&
         colors &&
         !finished &&

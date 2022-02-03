@@ -6,6 +6,7 @@
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: center;
+  font-size: 1.3rem;
 
   border-left: 0.15rem solid var(--gray-color);
   padding-left: 1rem;
