@@ -1,0 +1,25 @@
+header {
+  height: 3.5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 0.15rem solid var(--gray-color);
+
+  background: var(--secondary-color);
+  padding: 0 1rem;
+}
+
+.header__logo {
+  height: 50%;
+}
+
+.header__logo img {
+  height: 100%;
+}
+
+.header__info {
+  height: 2rem;
+  width: 2rem;
+}

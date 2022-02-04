@@ -1,6 +1,7 @@
 import React from 'react'
 import Result from '../Result/Result'
 import Sequence from '../Sequence/Sequence'
+import './Row.css'
 
 export default function Row({ values, solution }) {
   console.log(values, 'EN ROWWW')

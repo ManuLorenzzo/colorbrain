@@ -1,5 +1,6 @@
 import React from 'react'
 import Row from '../Row/Row'
+import './History.css'
 
 export default function History({ history, solution }) {
   return (

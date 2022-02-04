@@ -1,13 +1,19 @@
 :root {
   --background-color: #444857;
+  --secondary-color: #6d748f;
   --gray-color: #adadb4;
+  --error-color: #ff6961;
 }
 
-.colorset {
+.app {
   text-align: center;
   background: #444857;
   height: 100vh;
   position: relative;
+}
+.display {
+  background: #444857;
+  padding-bottom: 4rem;
 }
 
 .row {
@@ -16,4 +22,9 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+@font-face {
+  font-family: 'No-Virus';
+  src: url('./Fonts/no-virus.ttf');
 }

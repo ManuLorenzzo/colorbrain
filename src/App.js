@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import './App.css'
+import Attempts from './Components/Attempts/Attempts'
+import Header from './Components/Header/Header'
 import History from './Components/History/History'
 import Keyboard from './Components/Keyboard/Keyboard'
 import Result from './Components/Result/Result'
@@ -14,7 +18,7 @@ function App() {
   const [finished, setFinished] = useState(false)
   const [passed, setPassed] = useState(false)
   const [solution, setSolution] = useState(null)
-  const [attemps, setAttemps] = useState(6)
+  const [attempts, setAttempts] = useState(8)
 
   const changeValue = (i, newValue) => {
     console.log('Cambio valor de burbuja', i, ' ', newValue)
@@ -63,7 +67,7 @@ function App() {
       nextBubbleIndex && focusBubble(nextBubbleIndex)
     }
   }
-  console.log('INTENTOS -->', attemps)
+  console.log('INTENTOS -->', attempts)
 
   const handleSubmit = () => {
     if (values.length === bubblesLength && finished) {
@@ -72,9 +76,11 @@ function App() {
         alert('Has pasado el test')
         setPassed(true)
       } else {
-        if (attemps > 0) setAttemps(attemps - 1)
+        if (attempts > 0) setAttempts(attempts - 1)
         else alert('No te quedan intentos :(')
       }
+      const lastTest = document.querySelectorAll('.row')
+      console.log({ lastTest })
       setValues(initialValues)
       setSelectedBubble(0)
     }
@@ -89,28 +95,42 @@ function App() {
       setSolution(initialValues.map(el => Math.ceil(Math.random() * bubblesLength)))
     }
   }, [solution, initialValues])
-  console.log('SOLUTION --> ', solution)
 
-  console.log(values)
+  console.log('Solution -->', solution)
+  console.log('Values -->', values)
+
+  // INICIALIZA AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    })
+  }, [])
   return (
-    <div className="colorset">
-      <History history={history} solution={solution} />
-      {!passed && attemps > 0 && (
-        <div className="row">
-          <Sequence values={values} focusBubble={focusBubble} selectedBubble={selectedBubble} />
-          <Result values={values} solution={solution} show={false} />
-        </div>
-      )}
-      <Keyboard
-        bubblesLength={bubblesLength}
-        setColor={setColor}
-        finished={finished}
-        handleSubmit={handleSubmit}
-      />
-      {!passed && attemps === 0 && (
-        <button onClick={() => window.location.reload()}>Reintentar</button>
-      )}
-    </div>
+    <>
+      <div className="app">
+        <Header />
+        <section className="display">
+          <Attempts attempts={attempts} passed={passed} />
+          <History history={history} solution={solution} />
+          {!passed && attempts > 0 && (
+            <div className="row">
+              <Sequence values={values} focusBubble={focusBubble} selectedBubble={selectedBubble} />
+              <Result values={values} solution={solution} show={false} />
+            </div>
+          )}
+        </section>
+        <Keyboard
+          bubblesLength={bubblesLength}
+          setColor={setColor}
+          finished={finished}
+          handleSubmit={handleSubmit}
+        />
+        {!passed && attempts === 0 && (
+          <button onClick={() => window.location.reload()}>Reintentar</button>
+        )}
+      </div>
+    </>
   )
 }
 

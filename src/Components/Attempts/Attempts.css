@@ -1,0 +1,12 @@
+.attempts {
+  width: 90%;
+  margin: auto;
+  text-align: left;
+  border-bottom: 0.15rem solid var(--gray-color);
+  padding: 0.2rem 0;
+  font-weight: 500;
+}
+
+.attempts--warn span {
+  color: var(--error-color);
+}

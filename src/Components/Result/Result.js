@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Result.css'
+import SadIcon from '../../Svg/SadIcon.svg'
 
 export default function Result({ solution, values, show = true }) {
   const [state, setState] = useState([])
@@ -13,10 +14,15 @@ export default function Result({ solution, values, show = true }) {
           counter: found.length,
         }
       })
-      console.log({ alerts })
       let aux = []
       values.forEach((value, i) => {
-        console.log('ENTRO AL COLOR', value)
+        const alertIndex = alerts.findIndex(elem => elem.id === value)
+        values.forEach((value, i) => {
+          if (value === solution[i]) {
+            aux.push(1)
+            alerts[alertIndex].counter = alerts[alertIndex].counter - 1
+          }
+        })
         const alertIndex = alerts.findIndex(elem => elem.id === value)
         if (alertIndex !== -1 && alerts[alertIndex].counter > 0) {
           console.log('Quedan ', alerts[alertIndex].counter, 'intentos para ', value)
@@ -50,6 +56,11 @@ export default function Result({ solution, values, show = true }) {
             {elem === 1 && <div className="result__fill"></div>}
           </div>
         ))}
+      {show && !state.length > 0 && (
+        <div className="result__elem">
+          <img src={SadIcon} alt="info" />
+        </div>
+      )}
       {!show && <span>✘</span>}
     </div>
   )
