@@ -8,6 +8,7 @@ import History from './Components/History/History'
 import Keyboard from './Components/Keyboard/Keyboard'
 import Result from './Components/Result/Result'
 import Sequence from './Components/Sequence/Sequence'
+import InputRow from './Components/InputRow/InputRow'
 
 function App() {
   const bubblesLength = 4
@@ -40,6 +41,7 @@ function App() {
   }
 
   const focusBubble = i => {
+    console.log('Entro focus burbuja ', i)
     try {
       if (i >= bubblesLength)
         throw new Error('La burbuja seleccionada tiene un índice mayor que la longitud del array')
@@ -64,7 +66,7 @@ function App() {
       }
       const nextBubbleIndex = auxArray.find((elem, i) => !elem.value)?.index
       console.log('Hago focus a burbuja', nextBubbleIndex)
-      nextBubbleIndex && focusBubble(nextBubbleIndex)
+      nextBubbleIndex > -1 && focusBubble(nextBubbleIndex)
     }
   }
   console.log('INTENTOS -->', attempts)
@@ -98,7 +100,7 @@ function App() {
 
   console.log('Solution -->', solution)
   console.log('Values -->', values)
-
+  console.log('SelectedBubble ->', selectedBubble)
   // INICIALIZA AOS
   useEffect(() => {
     AOS.init({
@@ -114,10 +116,12 @@ function App() {
           <Attempts attempts={attempts} passed={passed} />
           <History history={history} solution={solution} />
           {!passed && attempts > 0 && (
-            <div className="row">
-              <Sequence values={values} focusBubble={focusBubble} selectedBubble={selectedBubble} />
-              <Result values={values} solution={solution} show={false} />
-            </div>
+            <InputRow
+              values={values}
+              focusBubble={focusBubble}
+              selectedBubble={selectedBubble}
+              solution={solution}
+            />
           )}
         </section>
         <Keyboard

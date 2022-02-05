@@ -18,5 +18,10 @@
     "id": 4,
     "hex": "rgb(253,253,150)",
     "active": true
+  },
+  {
+    "id": 5,
+    "hex": "rgb(182, 1, 182)",
+    "active": false
   }
 ]

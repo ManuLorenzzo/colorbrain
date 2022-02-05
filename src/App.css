@@ -16,14 +16,6 @@
   padding-bottom: 4rem;
 }
 
-.row {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
 @font-face {
   font-family: 'No-Virus';
   src: url('./Fonts/no-virus.ttf');

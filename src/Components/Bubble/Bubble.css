@@ -6,4 +6,5 @@
   border: 0.15rem solid #fff;
   cursor: pointer;
   transition: 0.5s ease;
+  outline: none;
 }

@@ -1,0 +1,77 @@
+.modal {
+  padding: 1.5rem 1rem;
+  padding-bottom: 0;
+  text-align: center;
+  max-height: 80vh;
+  box-sizing: content-box;
+  overflow-y: auto;
+}
+
+.modal h2 {
+  margin: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--gray-color);
+  font-weight: 400;
+}
+.modal h3 {
+  margin: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 300;
+}
+.modal h4 {
+  font-size: 1rem;
+  color: var(--error-color);
+  font-weight: 300;
+}
+
+.modal-header {
+  padding: 0 0.6rem;
+  text-align: center;
+}
+
+.modal__btn-container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.modal__btn {
+  width: 46%;
+  background: #333;
+  border-radius: 0.5rem;
+  color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.modal__btn--close {
+  margin-right: 3%;
+  background: var(--error-color);
+  color: #333;
+}
+
+.modal-action-btn {
+  padding: 0.8rem 5rem;
+  color: #333;
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 1rem 3rem;
+  text-align: center;
+  cursor: pointer;
+  border: #333 0.15rem solid;
+  user-select: none;
+  transition: 0.5s ease !important;
+}
+
+.popup-overlay {
+  z-index: 999 !important;
+}
