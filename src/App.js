@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Provider } from 'react-redux'
+import generateStore from './Redux/store'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import './App.css'
@@ -9,6 +11,10 @@ import Keyboard from './Components/Keyboard/Keyboard'
 import Result from './Components/Result/Result'
 import Sequence from './Components/Sequence/Sequence'
 import InputRow from './Components/InputRow/InputRow'
+import Display from './Components/Display/Display'
+import testsConfig from './Config/tests.json'
+import FillRedux from './Components/FillRedux'
+import { useSelector } from 'react-redux'
 
 function App() {
   const bubblesLength = 4
@@ -21,6 +27,8 @@ function App() {
   const [solution, setSolution] = useState(null)
   const [attempts, setAttempts] = useState(8)
 
+  const store = generateStore()
+  const config = testsConfig?.find(elem => elem.id === store?.state?.testSelected || elem.id === 0)
   const changeValue = (i, newValue) => {
     console.log('Cambio valor de burbuja', i, ' ', newValue)
     try {
@@ -109,9 +117,11 @@ function App() {
     })
   }, [])
   return (
-    <>
+    <Provider store={store}>
+      <FillRedux />
       <div className="app">
         <Header />
+        <Display config={config} />
         <section className="display">
           <Attempts attempts={attempts} passed={passed} />
           <History history={history} solution={solution} />
@@ -134,7 +144,7 @@ function App() {
           <button onClick={() => window.location.reload()}>Reintentar</button>
         )}
       </div>
-    </>
+    </Provider>
   )
 }
 

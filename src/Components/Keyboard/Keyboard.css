@@ -15,6 +15,7 @@
   z-index: 99;
   position: fixed;
   bottom: 0;
+  box-shadow: 0 -0.4rem 1.5rem rgba(0, 0, 0, 0.4);
 }
 
 @media only screen and (max-width: 600px) {

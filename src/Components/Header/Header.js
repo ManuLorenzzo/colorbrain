@@ -9,9 +9,7 @@ export default function Header() {
   return (
     <>
       <header>
-        <div className="header__logo">
-          <img src={Logo} alt="ColorBrain" />
-        </div>
+        <div className="header__logo">ColorBrain</div>
         <div className="header__info" onClick={() => setInfoOpen(!infoOpen)}>
           <img src={HelpIcon} alt="info" />
         </div>
