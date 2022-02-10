@@ -1,15 +1,16 @@
 // constantes
 const initialData = {
-  inputValues: [],
+  inputValues: [null, null, null, null],
   tests: [],
-  testSelected: 0,
-  keyboard: [],
+  selectedTest: 0,
+  selectedBubble: 0,
 }
 
 // types
 const SET_INPUT_VALUES_SUCCESS = 'SET_INPUT_VALUES_SUCCESS'
 const SET_TESTS_SUCCESS = 'SET_TESTS_SUCCESS'
-const SET_TESTS_SELECTED_SUCCESS = 'SET_TESTS_SELECTED_SUCCESS'
+const SET_SELECTED_TESTS_SUCCESS = 'SET_SELECTED_TESTS_SUCCESS'
+const SET_SELECTED_BUBBLE_SUCCESS = 'SET_SELECTED_BUBBLE_SUCCESS'
 
 // reducer
 export default function stateReducer(state = initialData, action) {
@@ -18,8 +19,10 @@ export default function stateReducer(state = initialData, action) {
       return { ...state, inputValues: action.payload }
     case SET_TESTS_SUCCESS:
       return { ...state, tests: action.payload }
-    case SET_TESTS_SELECTED_SUCCESS:
-      return { ...state, testSelected: action.payload }
+    case SET_SELECTED_TESTS_SUCCESS:
+      return { ...state, selectedTest: action.payload }
+    case SET_SELECTED_BUBBLE_SUCCESS:
+      return { ...state, selectedBubble: action.payload }
     default:
       return state
   }
@@ -49,10 +52,21 @@ export const setReduxTests = data => dispatch => {
   }
 }
 
-export const setReduxTestSelected = data => dispatch => {
+export const setReduxSelectedTest = data => dispatch => {
   try {
     dispatch({
-      type: SET_TESTS_SELECTED_SUCCESS,
+      type: SET_SELECTED_TESTS_SUCCESS,
+      payload: data,
+    })
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const setReduxSelectedBubble = data => dispatch => {
+  try {
+    dispatch({
+      type: SET_SELECTED_BUBBLE_SUCCESS,
       payload: data,
     })
   } catch (err) {

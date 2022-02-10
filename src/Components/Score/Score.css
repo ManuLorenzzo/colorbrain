@@ -1,0 +1,25 @@
+.score__passed {
+  background: var(--secondary-color);
+  border-radius: 0.4rem;
+  width: 80%;
+  margin: auto;
+  padding: 0.7rem;
+  margin-top: 1.5rem;
+
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+  box-shadow: 0.1rem 0.2rem 1.5rem rgba(0, 0, 0, 0.4);
+}
+
+.score__copy {
+  display: inline-block;
+  margin: auto;
+  background: white;
+  border-radius: 0.4rem;
+  outline: none;
+  border: none;
+  padding: 1rem 2rem;
+  font-weight: 500;
+  font-size: 0.8rem;
+}

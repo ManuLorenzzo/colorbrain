@@ -12,7 +12,15 @@ export default function FillRedux() {
       dispatch(
         setReduxTests(
           tests?.map(elem => {
-            return { ...elem, history: [], passed: false }
+            console.log([...Array(elem.inputs)].fill(null))
+            return {
+              ...elem,
+              history: [],
+              passed: false,
+              solution: [...Array(elem.inputs)]
+                .fill(null)
+                .map(el => Math.ceil(Math.random() * elem.colors)),
+            }
           })
         )
       )

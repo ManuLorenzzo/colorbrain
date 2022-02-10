@@ -1,18 +1,18 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Result from '../Result/Result'
 import Sequence from '../Sequence/Sequence'
 
-export default function InputRow({ values, solution, focusBubble, selectedBubble }) {
+export default function InputRow({ state, test }) {
   return (
     <>
       <div className="row input-row">
         <Sequence
-          values={values}
+          values={state?.inputValues}
           editable={true}
-          focusBubble={focusBubble}
-          selectedBubble={selectedBubble}
+          selectedBubble={state?.selectedBubble}
         />
-        <Result solution={solution} values={values} show={false} />
+        <Result solution={test?.solution} values={state?.values} show={false} />
       </div>
     </>
   )

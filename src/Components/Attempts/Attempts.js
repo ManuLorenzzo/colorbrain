@@ -1,23 +1,24 @@
 import React from 'react'
 import './Attempts.css'
 
-export default function Attempts({ attempts, passed }) {
-  return (
-    <>
-      {!passed && attempts > 0 && (
-        <div className={attempts > 2 ? 'attempts' : 'attempts attempts--warn'}>
-          {attempts > 1 ? (
-            <div>
-              Quedan <span>{attempts}</span> intentos
-            </div>
-          ) : (
-            <div>
-              Queda <span>{attempts}</span> intento
-            </div>
-          )}
-        </div>
-      )}
-      {!passed && attempts === 0 && <div className="attempts">🙄 Vaya, has fallado el test</div>}
-    </>
-  )
+export default function Attempts({ test, selectedTest }) {
+  if (test && !test.passed & (test.attempts > 0)) {
+    console.log('entro primer if')
+    return (
+      <div className={test.attempts > 2 ? 'attempts' : 'attempts attempts--warn'}>
+        {test.attempts > 1 ? (
+          <div>
+            Quedan <span>{test.attempts}</span> intentos
+          </div>
+        ) : (
+          <div>
+            Queda <span>{test.attempts}</span> intento
+          </div>
+        )}
+        {selectedTest && <div>Test #{selectedTest}</div>}
+      </div>
+    )
+  } else if (test && !test?.passed && test?.attempts === 0) {
+    return <div className="attempts">🙄 Vaya, has fallado el test</div>
+  } else return <></>
 }
