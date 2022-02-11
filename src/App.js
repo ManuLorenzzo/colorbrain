@@ -4,6 +4,7 @@ import generateStore from './Redux/store'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import './App.css'
+import EasyToastContainer from './Components/EasyToast/EasyToastContainer'
 import Header from './Components/Header/Header'
 import Keyboard from './Components/Keyboard/Keyboard'
 import Display from './Components/Display/Display'
@@ -20,6 +21,8 @@ function App() {
   }, [])
   return (
     <Provider store={store}>
+      <EasyToastContainer />
+
       <FillRedux />
       <div className="app">
         <Header />

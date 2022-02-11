@@ -8,7 +8,6 @@ export default function FillRedux() {
   const dispatch = useDispatch()
   useEffect(() => {
     if (reduxState && !reduxState.tests?.length) {
-      console.log('entro', reduxState.tests.length)
       dispatch(
         setReduxTests(
           tests?.map(elem => {
@@ -17,6 +16,7 @@ export default function FillRedux() {
               ...elem,
               history: [],
               passed: false,
+              initialAttempts: elem.attempts,
               solution: [...Array(elem.inputs)]
                 .fill(null)
                 .map(el => Math.ceil(Math.random() * elem.colors)),

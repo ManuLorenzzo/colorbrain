@@ -12,11 +12,6 @@
   position: relative;
 }
 
-.display {
-  background: #444857;
-  padding-bottom: 4rem;
-}
-
 @font-face {
   font-family: 'no-virus';
   src: url('./Fonts/no-virus.ttf');

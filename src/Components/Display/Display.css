@@ -1,0 +1,9 @@
+.display {
+  background: #444857;
+  padding-bottom: 4rem;
+}
+
+.display__swiper {
+  border: 1px red solid;
+  min-height: 80vh;
+}
