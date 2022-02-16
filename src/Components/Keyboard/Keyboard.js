@@ -10,7 +10,6 @@ import {
 } from '../../Redux/Ducks/stateDuck'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
-import { useVibrate } from 'react-use'
 
 export default function Keyboard() {
   const state = useSelector(store => store.state)
@@ -18,14 +17,11 @@ export default function Keyboard() {
   const myTest = state?.tests[state.selectedTest]
   const selectedBubble = state?.selectedBubble
 
-  const [vibrating, setVibrating] = useState(false)
-  useVibrate(vibrating, [10], false)
-
   const vibrate = () => {
-    setVibrating(true)
+    window.navigator.vibrate(10)
     setTimeout(() => {
-      setVibrating(false)
-    }, 100)
+      window.navigator.vibrate(0)
+    }, 10)
   }
 
   const finished = Boolean(!state?.inputValues.some(elem => elem == null) && selectedBubble == null)

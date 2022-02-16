@@ -44,7 +44,7 @@
 
 .modal__btn {
   width: 46%;
-  background: #333;
+  background: var(--background-color);
   border-radius: 0.5rem;
   color: white;
   border: none;
@@ -67,11 +67,15 @@
   margin: 1rem 3rem;
   text-align: center;
   cursor: pointer;
-  border: #333 0.15rem solid;
   user-select: none;
   transition: 0.5s ease !important;
 }
 
 .popup-overlay {
   z-index: 999 !important;
+}
+
+.popup-content {
+  width: 95% !important;
+  border-radius: 0.6rem;
 }

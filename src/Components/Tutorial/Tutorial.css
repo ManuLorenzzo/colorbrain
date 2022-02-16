@@ -1,0 +1,91 @@
+.tutorial {
+  color: var(--secondary-color);
+  pointer-events: none;
+}
+
+.tutorial__description {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5rem;
+}
+
+.tutorial__example {
+  background-color: var(--background-color);
+  padding: 2rem;
+  border-radius: 0.4rem;
+  color: white;
+
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.tutorial__example h3 {
+  color: white;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.tutorial__label {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.tutorial__solution {
+  border-bottom: 0.15rem dashed var(--secondary-color);
+  padding-bottom: 1rem;
+}
+
+.tutorial__example .bubble {
+  width: 3rem;
+  height: 3rem;
+}
+
+.tutorial__example .result {
+  height: 2rem;
+}
+
+.tutorial__example .row {
+  padding: 0;
+  margin-left: 4.6rem;
+}
+
+.tutorial__response-container {
+  border: 0.15rem var(--background-color) dashed;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  margin: 1rem auto;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  font-weight: 500;
+}
+
+.tutorial__response {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.tutorial__response .result__elem {
+  width: 2rem;
+  height: 1rem;
+}
+
+.tutorial__response-container img {
+  filter: invert(100%);
+}
+
+.tutorial__response .result__border {
+  border-color: var(--background-color);
+}
+
+.tutorial__response .result__fill {
+  background: var(--background-color);
+}

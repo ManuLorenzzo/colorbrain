@@ -3,6 +3,7 @@ import './Header.css'
 import Logo from '../../logo.png'
 import HelpIcon from '../../Svg/HelpIcon.svg'
 import Modal from '../Modal/Modal'
+import Tutorial from '../Tutorial/Tutorial'
 
 export default function Header() {
   const [infoOpen, setInfoOpen] = useState(false)
@@ -14,7 +15,13 @@ export default function Header() {
           <img src={HelpIcon} alt="info" />
         </div>
       </header>
-      <Modal open={infoOpen} onClose={() => setInfoOpen(false)} title="Info" />
+      <Modal
+        open={infoOpen}
+        onClose={() => setInfoOpen(false)}
+        hasCloseButton={false}
+        title="¿Cómo jugar?"
+        content={<Tutorial />}
+      />
     </>
   )
 }

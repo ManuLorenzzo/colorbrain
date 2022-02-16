@@ -3,12 +3,13 @@
   --secondary-color: #6d748f;
   --gray-color: #adadb4;
   --error-color: #ff6961;
+  --box-shadow: 0.1rem 0.2rem 1.5rem rgba(0, 0, 0, 0.4);
 }
 
 @media only screen and (max-width: 600px) {
   /*FORMATO MÓVIL*/
   html {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
