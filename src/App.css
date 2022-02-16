@@ -16,3 +16,18 @@
   font-family: 'no-virus';
   src: url('./Fonts/no-virus.ttf');
 }
+
+.btn {
+  display: inline-block;
+  margin: auto;
+  background: white;
+  border-radius: 0.4rem;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  padding: 0.7rem 2rem;
+  width: 13rem;
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+  cursor: pointer;
+}

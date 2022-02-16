@@ -4,6 +4,7 @@ const initialData = {
   tests: [],
   selectedTest: 0,
   selectedBubble: 0,
+  scrollTo: null,
 }
 
 // types
@@ -11,6 +12,7 @@ const SET_INPUT_VALUES_SUCCESS = 'SET_INPUT_VALUES_SUCCESS'
 const SET_TESTS_SUCCESS = 'SET_TESTS_SUCCESS'
 const SET_SELECTED_TESTS_SUCCESS = 'SET_SELECTED_TESTS_SUCCESS'
 const SET_SELECTED_BUBBLE_SUCCESS = 'SET_SELECTED_BUBBLE_SUCCESS'
+const SET_SCROLL_TO_SUCCESS = 'SET_SCROLL_TO_SUCCESS'
 
 // reducer
 export default function stateReducer(state = initialData, action) {
@@ -23,6 +25,8 @@ export default function stateReducer(state = initialData, action) {
       return { ...state, selectedTest: action.payload }
     case SET_SELECTED_BUBBLE_SUCCESS:
       return { ...state, selectedBubble: action.payload }
+    case SET_SCROLL_TO_SUCCESS:
+      return { ...state, scrollTo: action.payload }
     default:
       return state
   }
@@ -67,6 +71,17 @@ export const setReduxSelectedBubble = data => dispatch => {
   try {
     dispatch({
       type: SET_SELECTED_BUBBLE_SUCCESS,
+      payload: data,
+    })
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const setReduxScrollTo = data => dispatch => {
+  try {
+    dispatch({
+      type: SET_SCROLL_TO_SUCCESS,
       payload: data,
     })
   } catch (err) {

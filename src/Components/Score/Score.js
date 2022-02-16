@@ -6,14 +6,6 @@ import easyToast from '../EasyToast/easyToast'
 export default function Score({ state, test }) {
   const [clipboardState, copyToClipboard] = useCopyToClipboard()
 
-  useEffect(() => {
-    if (clipboardState.value && !clipboardState.error) {
-      easyToast('success', 'Copiado a portapapeles')
-    } else if (clipboardState.error) {
-      easyToast('error', 'Ha ocurrido un error copiando el resultado')
-    }
-  }, [clipboardState])
-
   if (state && test && test.passed) {
     const generateCopy = () => {
       let copy = `ColorBrain - Test #${state.selectedTest + 1} - ${
@@ -29,17 +21,37 @@ export default function Score({ state, test }) {
         } else copy += '✗'
         copy += '\n'
       })
-      console.log(copyToClipboard(copy))
+      copyToClipboard(copy)
+
+      if (clipboardState.value && !clipboardState.error) {
+        if (navigator.share) {
+          navigator
+            .share({
+              title: 'hola',
+              text: 'adios',
+              url: 'www.google.es',
+            })
+            .then(() => console.log('Successful share'))
+            .catch(error => console.log('Error sharing', error))
+        }
+        easyToast('success', 'Copiado a portapapeles')
+      } else if (clipboardState.error) {
+        easyToast('error', 'Ha ocurrido un error copiando el resultado')
+      }
     }
 
     return (
       <div className="score__passed">
         <span>
-          ¡Genial! Has resuelto el test #{state.selectedTest + 1} en {test.history.length}{' '}
-          {test.history.length > 1 ? 'intentos' : 'intento'}
+          ¡Genial! Has resuelto el test <b>#{state.selectedTest + 1}</b> en{' '}
+          <b>{test.history.length}</b> {test.history.length > 1 ? 'intentos' : 'intento'}
         </span>
-        <div className="score__copy" onClick={generateCopy}>
-          COPIAR RESULTADOS
+        <span>Aún te quedan dos tests más. Arrastra a la izquierda</span>
+        <div className="score__btns">
+          <div className="btn" onClick={generateCopy}>
+            COPIAR RESULTADOS
+          </div>
+          <div className="btn">SIGUIENTE TEST</div>
         </div>
       </div>
     )

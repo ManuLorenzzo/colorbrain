@@ -3,6 +3,7 @@ import Row from '../Row/Row'
 import './History.css'
 
 export default function History({ test }) {
+  console.log({ test })
   if (test?.history && test?.history?.length > 0) {
     return (
       <div className="history">
