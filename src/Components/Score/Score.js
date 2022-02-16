@@ -103,56 +103,58 @@ export default function Score({ state, test }) {
     }
 
     return (
-      <div className="score__passed">
-        <div className="score__left">
-          <div>#{state.selectedTest + 1}</div>
-          <div>{test?.passed ? 'RESUELTO' : 'FALLADO'}</div>
-        </div>
-        <div className="score__right">
-          {test?.passed && (
-            <span>
-              ¡Genial! Has resuelto el test <b>#{state.selectedTest + 1}</b> en{' '}
-              <b>{test.history.length}</b> {test.history.length > 1 ? 'intentos' : 'intento'}
-            </span>
-          )}
-          <div className="score__btns">
-            <div className="btn" onClick={() => copy(false)}>
-              COPIAR TEST
-            </div>
-            {!remainingTests && (
-              <div className="btn" onClick={() => copy()}>
-                COPIAR RESULTADOS
-              </div>
-            )}
-            {state?.tests[state.tests?.length - 1]?.id !== test.id && remainingTests > 0 && (
-              <div className="btn" onClick={() => dispatch(setReduxScrollTo(test.id + 1))}>
-                SIGUIENTE TEST
-              </div>
-            )}
+      <div className="score">
+        <div className="score__container">
+          <div className="score__left">
+            <div>#{state.selectedTest + 1}</div>
+            <div>{test?.passed ? 'RESUELTO' : 'FALLADO'}</div>
           </div>
-          {!remainingTests && (
-            <div className="score__share">
-              <WhatsappShareButton url={url} title={getFullCopy()}>
-                <WhatsappIcon round={true} size={25} />
-              </WhatsappShareButton>
-              <TelegramShareButton url={url} title={getFullCopy()}>
-                <TelegramIcon round={true} size={25} />
-              </TelegramShareButton>
-              <TwitterShareButton url={url} title={getFullCopy()}>
-                <TwitterIcon round={true} size={25} />
-              </TwitterShareButton>
-              <FacebookMessengerShareButton url={url} title={getFullCopy()}>
-                <FacebookMessengerIcon round={true} size={25} />
-              </FacebookMessengerShareButton>
-              <FacebookShareButton url={url} title={getFullCopy()}>
-                <FacebookIcon round={true} size={25} />
-              </FacebookShareButton>
-              <PinterestShareButton url={url} title={getFullCopy()}>
-                <PinterestIcon round={true} size={25} />
-              </PinterestShareButton>
+          <div className="score__right">
+            {test?.passed && (
+              <span>
+                ¡Genial! Has resuelto el test <b>#{state.selectedTest + 1}</b> en{' '}
+                <b>{test.history.length}</b> {test.history.length > 1 ? 'intentos' : 'intento'}
+              </span>
+            )}
+            <div className="score__btns">
+              <div className="btn" onClick={() => copy(false)}>
+                COPIAR TEST
+              </div>
+              {!remainingTests && (
+                <div className="btn" onClick={() => copy()}>
+                  COPIAR RESULTADOS
+                </div>
+              )}
+              {state?.tests[state.tests?.length - 1]?.id !== test.id && remainingTests > 0 && (
+                <div className="btn" onClick={() => dispatch(setReduxScrollTo(test.id + 1))}>
+                  SIGUIENTE TEST
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
+        {!remainingTests && (
+          <div className="score__share">
+            <WhatsappShareButton url={url} title={getFullCopy()}>
+              <WhatsappIcon round={true} />
+            </WhatsappShareButton>
+            <TelegramShareButton url={url} title={getFullCopy()}>
+              <TelegramIcon round={true} size={25} />
+            </TelegramShareButton>
+            <TwitterShareButton url={url} title={getFullCopy()}>
+              <TwitterIcon round={true} size={25} />
+            </TwitterShareButton>
+            <FacebookMessengerShareButton url={url} title={getFullCopy()}>
+              <FacebookMessengerIcon round={true} size={25} />
+            </FacebookMessengerShareButton>
+            <FacebookShareButton url={url} title={getFullCopy()}>
+              <FacebookIcon round={true} size={25} />
+            </FacebookShareButton>
+            <PinterestShareButton url={url} title={getFullCopy()}>
+              <PinterestIcon round={true} size={25} />
+            </PinterestShareButton>
+          </div>
+        )}
       </div>
     )
   } else return <></>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import colors from '../../Config/colors.json'
 import changeValue from '../../MyMethods/changeValue'
@@ -10,12 +10,23 @@ import {
 } from '../../Redux/Ducks/stateDuck'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
+import { useVibrate } from 'react-use'
 
 export default function Keyboard() {
   const state = useSelector(store => store.state)
   const dispatch = useDispatch()
   const myTest = state?.tests[state.selectedTest]
   const selectedBubble = state?.selectedBubble
+
+  const [vibrating, setVibrating] = useState(false)
+  useVibrate(vibrating, [10], false)
+
+  const vibrate = () => {
+    setVibrating(true)
+    setTimeout(() => {
+      setVibrating(false)
+    }, 100)
+  }
 
   const finished = Boolean(!state?.inputValues.some(elem => elem == null) && selectedBubble == null)
 
@@ -53,6 +64,7 @@ export default function Keyboard() {
   }
 
   const handleSubmit = () => {
+    vibrate()
     if (finished && myTest.attempts) {
       console.log('ete sech', state.inputValues, myTest.solution)
       const result = getResult({
@@ -83,7 +95,16 @@ export default function Keyboard() {
           colors.length &&
           !finished &&
           [...new Array(myTest.colors)].map((elem, i) => {
-            return <Bubble key={i} color={colors[i].hex} onClick={() => setColor(colors[i].id)} />
+            return (
+              <Bubble
+                key={i}
+                color={colors[i].hex}
+                onClick={() => {
+                  setColor(colors[i].id)
+                  vibrate()
+                }}
+              />
+            )
           })}
       </div>
       {finished && <div className="keyboard__submit">✔</div>}
