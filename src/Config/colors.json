@@ -1,27 +1,26 @@
 [
   {
     "id": 1,
-    "hex": "#78e6a2",
-    "active": true
+    "hex": "#78e6a2"
   },
   {
     "id": 2,
-    "hex": "rgb(85, 191, 240)",
-    "active": true
+    "hex": "rgb(85, 191, 240)"
   },
   {
     "id": 3,
-    "hex": "rgb(255,105,97)",
-    "active": true
+    "hex": "#FD4B4B"
   },
   {
     "id": 4,
-    "hex": "rgb(253,253,150)",
-    "active": true
+    "hex": "rgb(253,253,150)"
   },
   {
     "id": 5,
-    "hex": "rgb(182, 1, 182)",
-    "active": false
+    "hex": "rgb(182, 1, 182)"
+  },
+  {
+    "id": 6,
+    "hex": "#FF6B3C"
   }
 ]

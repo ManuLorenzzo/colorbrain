@@ -4,6 +4,7 @@ import Result from '../Result/Result'
 import Sequence from '../Sequence/Sequence'
 
 export default function InputRow({ state, test }) {
+  console.log('inputRow ->', state, test)
   return (
     <>
       <div className="row input-row">

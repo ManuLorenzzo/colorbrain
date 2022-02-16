@@ -5,6 +5,13 @@
   --error-color: #ff6961;
 }
 
+@media only screen and (max-width: 600px) {
+  /*FORMATO MÓVIL*/
+  html {
+    font-size: 11px;
+  }
+}
+
 .app {
   text-align: center;
   background: #444857;

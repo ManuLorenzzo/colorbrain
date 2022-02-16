@@ -8,7 +8,7 @@ export default function History({ test }) {
     return (
       <div className="history">
         {test.history.map(elem => (
-          <Row values={elem.values} solution={test?.solution} />
+          <Row values={elem.values} solution={test?.solution} colorsLength={test?.colors} />
         ))}
       </div>
     )

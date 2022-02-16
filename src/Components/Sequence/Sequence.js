@@ -22,10 +22,10 @@ export default function Sequence({ values, editable = true, selectedBubble }) {
         values &&
         values.length &&
         values.map((value, i) => {
-          console.log('entro ', value, i)
           const getHex = () => colors.find(elem => elem.id === value)?.hex || null
           return (
             <Bubble
+              key={i}
               color={selectedBubble === i && editable ? '#fff' : getHex()}
               onClick={() => editable && focusBubble(i)}
             />

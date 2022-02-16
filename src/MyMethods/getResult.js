@@ -39,20 +39,35 @@ const addIncludedToStatus = (status, id, alerts) => {
   }
 }
 
-export default function getResult({ values, solution }) {
+export default function getResult({ values, solution, colorsLength }) {
   console.log({ values, solution })
   try {
     if (values && solution && values?.length === solution?.length) {
-      let alerts = solution.map((el, index) => {
-        const found = solution.filter(elem => elem === index + 1)
-        return {
-          id: index + 1,
-          counter: found.length,
-        }
-      })
+      let alerts = Array(colorsLength)
+        .fill(null)
+        .map((el, index) => {
+          const found = solution.filter(elem => elem === index + 1)
+          return {
+            id: index + 1,
+            counter: found.length,
+          }
+        })
+      console.log(
+        'When values: ',
+        values,
+        'alerts: ',
+        solution.map((el, index) => {
+          const found = solution.filter(elem => elem === index + 1)
+          return {
+            id: index + 1,
+            counter: found.length,
+          }
+        })
+      )
       let status = []
       values.forEach((value, i) => {
         const alertIndex = alerts.findIndex(elem => elem.id === value)
+        console.log('ENTRO A POSICIÓN ', i, 'CON VALUE ', value, 'ALERT INDEX ', alertIndex)
         if (alertIndex !== -1) {
           if (solution[i] === value) {
             console.log('EL COLOR ', value, 'HA HECHO MATCH EN LA SECUENCIA EN LA POSICIÓN', i)
@@ -73,6 +88,7 @@ export default function getResult({ values, solution }) {
       })
       status = status.filter(elem => elem.result)
       status.sort((a, b) => a.result - b.result)
+      console.log('STATUS DENTRO DE GETRESULT ', status)
       return status.length ? status : null
     } else throw new Error('No values or solution in getResult')
   } catch (err) {

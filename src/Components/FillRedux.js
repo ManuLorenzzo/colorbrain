@@ -11,7 +11,6 @@ export default function FillRedux() {
       dispatch(
         setReduxTests(
           tests?.map(elem => {
-            console.log([...Array(elem.inputs)].fill(null))
             return {
               ...elem,
               history: [],

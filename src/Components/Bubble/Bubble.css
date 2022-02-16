@@ -1,7 +1,7 @@
 .bubble {
   background: var(--gray-color);
-  height: 3rem;
-  width: 3rem;
+  height: 4rem;
+  width: 4rem;
   border-radius: 50%;
   border: 0.15rem solid #fff;
   cursor: pointer;

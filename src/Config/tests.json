@@ -1,5 +1,5 @@
 [
-  { "id": 0, "inputs": 4, "colors": 4, "attempts": 8 },
-  { "id": 1, "inputs": 4, "colors": 5, "attempts": 8 },
-  { "id": 2, "inputs": 5, "colors": 6, "attempts": 10 }
+  { "id": 0, "inputs": 4, "colors": 4, "attempts": 7 },
+  { "id": 1, "inputs": 4, "colors": 5, "attempts": 7 },
+  { "id": 2, "inputs": 5, "colors": 6, "attempts": 8 }
 ]

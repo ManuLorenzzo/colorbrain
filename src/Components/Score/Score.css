@@ -5,12 +5,41 @@
   margin: auto;
   padding: 0.7rem;
   margin-top: 1.5rem;
+  padding: 2rem 1rem;
 
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
+  align-items: center;
   gap: 0.5rem;
   box-shadow: 0.1rem 0.2rem 1.5rem rgba(0, 0, 0, 0.4);
   cursor: auto;
+}
+
+.score__left {
+  width: 20%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.score__left div:first-child {
+  font-size: 2.5rem;
+  color: var(--background-color);
+  font-weight: 500;
+}
+.score__left div:last-child {
+  font-size: 1rem;
+  color: var(--background-color);
+  font-weight: 500;
+}
+.score__right {
+  width: 80%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  gap: 1rem;
 }
 
 .score__btns {
@@ -22,4 +51,18 @@
 .score__btns .btn:last-child {
   background-color: var(--background-color);
   color: white;
+}
+
+.test {
+  border: 1px red solid;
+  height: 3rem;
+  width: 3rem;
+  z-index: 99999;
+}
+
+.score__share {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+  max-width: 90%;
 }

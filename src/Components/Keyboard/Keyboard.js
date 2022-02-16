@@ -54,37 +54,38 @@ export default function Keyboard() {
 
   const handleSubmit = () => {
     if (finished && myTest.attempts) {
-      const result = getResult({ values: state.inputValues, solution: myTest.solution })
+      console.log('ete sech', state.inputValues, myTest.solution)
+      const result = getResult({
+        values: state.inputValues,
+        solution: myTest.solution,
+        colorsLength: myTest.colors,
+      })
+      console.log({ result })
       let testsCopy = JSON.parse(JSON.stringify(state.tests))
 
-      if (JSON.stringify(state.inputValues) === JSON.stringify(myTest.solution)) {
-        testsCopy[state.selectedTest] = {
-          ...myTest,
-          history: [...myTest.history, { values: state.inputValues, result }],
-          passed: true,
-        }
-      } else {
-        if (myTest.attempts > 0)
-          testsCopy[state.selectedTest] = {
-            ...myTest,
-            history: [...myTest.history, { values: state.inputValues, result }],
-            attempts: myTest.attempts - 1,
-          }
+      testsCopy[state.selectedTest] = {
+        ...myTest,
+        history: [...myTest.history, { values: state.inputValues, result }],
+        attempts: myTest.attempts - 1,
+        passed: Boolean(JSON.stringify(state.inputValues) === JSON.stringify(myTest.solution)),
       }
+
       dispatch(setReduxTests(testsCopy))
-      dispatch(setReduxInputValues([null, null, null, null]))
+      dispatch(setReduxInputValues(Array(state?.inputValues?.length || 4).fill(null)))
       dispatch(setReduxSelectedBubble(0))
     }
   }
   return (
     <div className="keyboard" onClick={finished ? handleSubmit : () => {}}>
-      {myTest &&
-        colors &&
-        colors.length &&
-        !finished &&
-        [...new Array(myTest.colors)].map((elem, i) => {
-          return <Bubble color={colors[i].hex} onClick={() => setColor(colors[i].id)} />
-        })}
+      <div className="keyboard__bubbles">
+        {myTest &&
+          colors &&
+          colors.length &&
+          !finished &&
+          [...new Array(myTest.colors)].map((elem, i) => {
+            return <Bubble key={i} color={colors[i].hex} onClick={() => setColor(colors[i].id)} />
+          })}
+      </div>
       {finished && <div className="keyboard__submit">✔</div>}
     </div>
   )
