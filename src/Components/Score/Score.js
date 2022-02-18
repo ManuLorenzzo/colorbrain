@@ -11,32 +11,15 @@ import {
   FacebookShareButton,
   FacebookMessengerShareButton,
   TwitterShareButton,
-  RedditShareButton,
-  LineShareButton,
   PinterestShareButton,
 } from 'react-share'
 import {
-  EmailIcon,
   FacebookIcon,
   FacebookMessengerIcon,
-  HatenaIcon,
-  InstapaperIcon,
-  LineIcon,
-  LinkedinIcon,
-  LivejournalIcon,
-  MailruIcon,
-  OKIcon,
   PinterestIcon,
-  PocketIcon,
-  RedditIcon,
   TelegramIcon,
-  TumblrIcon,
   TwitterIcon,
-  ViberIcon,
-  VKIcon,
-  WeiboIcon,
   WhatsappIcon,
-  WorkplaceIcon,
 } from 'react-share'
 export default function Score({ state, test }) {
   const [clipboardState, copyToClipboard] = useCopyToClipboard()
@@ -44,6 +27,8 @@ export default function Score({ state, test }) {
   const remainingTests = state?.tests?.filter(test => !test.passed)?.length
   let today = moment().format('DD-MM-YYYY')
   const url = 'https://www.google.es'
+
+  const finishedTest = Boolean(test.passed || !test.attempts)
 
   const getTestCopy = () => {
     console.log('entro')
@@ -91,7 +76,7 @@ export default function Score({ state, test }) {
     }
   }
 
-  if (state && test && test.passed) {
+  if (state && test && finishedTest) {
     const copy = (all = true) => {
       const copy = all ? getFullCopy() : getTestCopy()
       if (copy) {
@@ -120,20 +105,22 @@ export default function Score({ state, test }) {
               <div className="btn" onClick={() => copy(false)}>
                 COPIAR TEST
               </div>
-              {!remainingTests && (
+              {(!remainingTests || !test.passed) && (
                 <div className="btn" onClick={() => copy()}>
                   COPIAR RESULTADOS
                 </div>
               )}
-              {state?.tests[state.tests?.length - 1]?.id !== test.id && remainingTests > 0 && (
-                <div className="btn" onClick={() => dispatch(setReduxScrollTo(test.id + 1))}>
-                  SIGUIENTE TEST
-                </div>
-              )}
+              {test.passed &&
+                state?.tests[state.tests?.length - 1]?.id !== test.id &&
+                remainingTests > 0 && (
+                  <div className="btn" onClick={() => dispatch(setReduxScrollTo(test.id + 1))}>
+                    SIGUIENTE TEST
+                  </div>
+                )}
             </div>
           </div>
         </div>
-        {!remainingTests && (
+        {(!remainingTests || !test.passed) && (
           <div className="score__share">
             <WhatsappShareButton url={url} title={getFullCopy()}>
               <WhatsappIcon round={true} />

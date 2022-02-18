@@ -10,13 +10,15 @@ import {
 } from '../../Redux/Ducks/stateDuck'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
+import SadIcon from '../../Svg/SadIcon.svg'
 
 export default function Keyboard() {
   const state = useSelector(store => store.state)
   const dispatch = useDispatch()
   const myTest = state?.tests[state.selectedTest]
   const selectedBubble = state?.selectedBubble
-
+  const hasLost = !myTest?.attempts && !myTest?.passed
+  console.log({ myTest, hasLost })
   const vibrate = () => {
     window.navigator.vibrate(10)
     setTimeout(() => {
@@ -83,27 +85,30 @@ export default function Keyboard() {
       dispatch(setReduxSelectedBubble(0))
     }
   }
-  return (
-    <div className="keyboard" onClick={finished ? handleSubmit : () => {}}>
-      <div className="keyboard__bubbles">
-        {myTest &&
-          colors &&
-          colors.length &&
-          !finished &&
-          [...new Array(myTest.colors)].map((elem, i) => {
-            return (
-              <Bubble
-                key={i}
-                color={colors[i].hex}
-                onClick={() => {
-                  setColor(colors[i].id)
-                  vibrate()
-                }}
-              />
-            )
-          })}
+  if (!hasLost) {
+    return (
+      <div className="keyboard" onClick={finished ? handleSubmit : () => {}}>
+        <div className="keyboard__bubbles">
+          {myTest &&
+            colors &&
+            colors.length &&
+            !finished &&
+            !hasLost &&
+            [...new Array(myTest.colors)].map((elem, i) => {
+              return (
+                <Bubble
+                  key={i}
+                  color={colors[i].hex}
+                  onClick={() => {
+                    setColor(colors[i].id)
+                    vibrate()
+                  }}
+                />
+              )
+            })}
+        </div>
+        {!hasLost && finished && <div className="keyboard__submit">✔</div>}
       </div>
-      {finished && <div className="keyboard__submit">✔</div>}
-    </div>
-  )
+    )
+  } else return <></>
 }

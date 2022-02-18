@@ -8,6 +8,7 @@ const initialData = {
 }
 
 // types
+const SET_STATE_SUCCESS = 'SET_STATE_SUCCESS'
 const SET_INPUT_VALUES_SUCCESS = 'SET_INPUT_VALUES_SUCCESS'
 const SET_TESTS_SUCCESS = 'SET_TESTS_SUCCESS'
 const SET_SELECTED_TESTS_SUCCESS = 'SET_SELECTED_TESTS_SUCCESS'
@@ -17,6 +18,8 @@ const SET_SCROLL_TO_SUCCESS = 'SET_SCROLL_TO_SUCCESS'
 // reducer
 export default function stateReducer(state = initialData, action) {
   switch (action.type) {
+    case SET_STATE_SUCCESS:
+      return action.payload
     case SET_INPUT_VALUES_SUCCESS:
       return { ...state, inputValues: action.payload }
     case SET_TESTS_SUCCESS:
@@ -33,6 +36,17 @@ export default function stateReducer(state = initialData, action) {
 }
 
 // actions
+
+export const setReduxState = data => dispatch => {
+  try {
+    dispatch({
+      type: SET_STATE_SUCCESS,
+      payload: data,
+    })
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const setReduxInputValues = data => dispatch => {
   try {

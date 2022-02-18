@@ -28,12 +28,12 @@
 }
 
 .score__left div:first-child {
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   color: var(--background-color);
   font-weight: 500;
 }
 .score__left div:last-child {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--background-color);
   font-weight: 500;
 }
