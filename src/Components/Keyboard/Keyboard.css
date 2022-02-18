@@ -9,7 +9,7 @@
   color: white;
   gap: 2.5rem;
   border-top: 0.15rem solid var(--gray-color);
-  overflow-x: auto;
+  overflow: hidden;
   z-index: 99;
   position: fixed;
   bottom: 0;
@@ -20,6 +20,13 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
+}
+
+.keyboard__submit {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (min-width: 800px) {
