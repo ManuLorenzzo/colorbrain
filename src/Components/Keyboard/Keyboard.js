@@ -95,7 +95,7 @@ export default function Keyboard() {
                   key={i}
                   color={colors[i].hex}
                   onClick={() => {
-                    window.navigator.vibrate(1000)
+                    vibrate()
                     setColor(colors[i].id)
                   }}
                 />
