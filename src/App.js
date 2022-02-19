@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import generateStore from './Redux/store'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
 import './App.css'
 import EasyToastContainer from './Components/EasyToast/EasyToastContainer'
 import Header from './Components/Header/Header'
@@ -14,12 +12,6 @@ import AdSense from 'react-adsense'
 function App() {
   const store = generateStore()
   // INICIALIZA AOS
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-    })
-  }, [])
   return (
     <Provider store={store}>
       <EasyToastContainer />
