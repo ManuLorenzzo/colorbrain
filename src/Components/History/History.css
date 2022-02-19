@@ -1,3 +1,17 @@
+.history > div {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.7rem;
+}
+
+.history__counter {
+  font-weight: 500;
+  color: var(--secondary-color);
+  font-size: 1.5rem;
+}
+
 .history .bubble {
   cursor: auto;
 }

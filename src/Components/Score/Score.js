@@ -31,13 +31,11 @@ export default function Score({ state, test }) {
   const finishedTest = Boolean(test.passed || !test.attempts)
 
   const getTestCopy = () => {
-    console.log('entro')
     try {
       let copy = `ColorBrain - ${today} - Test #${state.selectedTest + 1} ${
         test.passed ? 'resuelto' : 'fallado'
       } - ${test.initialAttempts - test.attempts}/${test.initialAttempts}\n`
       test.history.forEach(elem => {
-        console.log({ elem })
         if (elem.result) {
           Object.values(elem.result).forEach(el => {
             if (el.result === 1) return (copy += '⚫ ')

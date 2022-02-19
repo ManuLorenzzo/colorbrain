@@ -18,8 +18,6 @@ export default function Result({ solution, values, colorsLength, show = true }) 
     }
   }, [values, solution, colorsLength])
 
-  console.log('When values: ', values, 'State: ', state)
-
   return (
     <div className="result" style={{ gridTemplateColumns }}>
       {show &&

@@ -10,7 +10,6 @@ import {
 } from '../../Redux/Ducks/stateDuck'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
-import SadIcon from '../../Svg/SadIcon.svg'
 
 export default function Keyboard() {
   const state = useSelector(store => store.state)
@@ -18,12 +17,9 @@ export default function Keyboard() {
   const myTest = state?.tests[state.selectedTest]
   const selectedBubble = state?.selectedBubble
   const hasLost = !myTest?.attempts && !myTest?.passed
-  console.log({ myTest, hasLost })
+
   const vibrate = () => {
-    window.navigator.vibrate(10)
-    setTimeout(() => {
-      window.navigator.vibrate(0)
-    }, 10)
+    window.navigator.vibrate(1000)
   }
 
   const finished = Boolean(!state?.inputValues.some(elem => elem == null) && selectedBubble == null)
@@ -43,7 +39,7 @@ export default function Keyboard() {
         if (!values) throw new Error('No values in setColor function')
         dispatch(setReduxInputValues(values))
         let auxArray = []
-        let con = +1
+        let con = selectedBubble + 1
         while (auxArray.length < myTest.inputs) {
           if (con < myTest.inputs) auxArray.push({ value: values[con], index: con })
           else {
@@ -53,7 +49,6 @@ export default function Keyboard() {
           con++
         }
         const nextBubbleIndex = auxArray.find((elem, i) => !elem.value)?.index
-        console.log('Hago focus a burbuja', nextBubbleIndex)
         nextBubbleIndex > -1 && focusBubble(nextBubbleIndex)
       }
     } catch (err) {
@@ -64,13 +59,11 @@ export default function Keyboard() {
   const handleSubmit = () => {
     vibrate()
     if (finished && myTest.attempts) {
-      console.log('ete sech', state.inputValues, myTest.solution)
       const result = getResult({
         values: state.inputValues,
         solution: myTest.solution,
         colorsLength: myTest.colors,
       })
-      console.log({ result })
       let testsCopy = JSON.parse(JSON.stringify(state.tests))
 
       testsCopy[state.selectedTest] = {
@@ -100,8 +93,8 @@ export default function Keyboard() {
                   key={i}
                   color={colors[i].hex}
                   onClick={() => {
+                    window.navigator.vibrate(1000)
                     setColor(colors[i].id)
-                    vibrate()
                   }}
                 />
               )

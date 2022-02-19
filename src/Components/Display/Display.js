@@ -32,7 +32,6 @@ export default function Display() {
       if (state?.scrollTo) {
         if (state.tests.find(elem => elem.id === state.scrollTo)) {
           const swiper = document.querySelector('.swiper')?.swiper
-          console.log(swiper)
           swiper?.slideNext()
           dispatch(setReduxScrollTo(null))
         }
@@ -45,12 +44,7 @@ export default function Display() {
 
   return (
     <section className="display">
-      <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        onSlideChange={swiper => onSlideChange(swiper)}
-        onSwiper={swiper => console.log(swiper)}
-      >
+      <Swiper spaceBetween={50} slidesPerView={1} onSlideChange={swiper => onSlideChange(swiper)}>
         {state?.tests
           ?.filter((test, i) => test.id === 0 || test.passed || state.tests[i - 1]?.passed)
           .map((elem, i) => {

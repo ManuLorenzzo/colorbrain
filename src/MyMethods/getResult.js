@@ -1,5 +1,4 @@
 const addMatchToStatus = (status, id, alerts) => {
-  console.log('ENTRO EN addMatch. id -> ', id, ' alerts -> ', alerts, ' status -> ', status)
   try {
     if (alerts > 0) {
       status.push({
@@ -16,7 +15,6 @@ const addMatchToStatus = (status, id, alerts) => {
         result: 1,
       })
     }
-    console.log({ status }, 'Retorno status en addMatch')
     return status
   } catch (err) {
     console.error(err)
@@ -24,7 +22,6 @@ const addMatchToStatus = (status, id, alerts) => {
 }
 
 const addIncludedToStatus = (status, id, alerts) => {
-  console.log('ENTRO EN included. id -> ', id, ' alerts -> ', alerts, ' status -> ', status)
   try {
     if (alerts > 0) {
       status.push({
@@ -32,7 +29,6 @@ const addIncludedToStatus = (status, id, alerts) => {
         result: 2,
       })
     }
-    console.log({ status }, 'Retorno status en addMatch')
     return status
   } catch (err) {
     console.error(err)
@@ -40,7 +36,6 @@ const addIncludedToStatus = (status, id, alerts) => {
 }
 
 export default function getResult({ values, solution, colorsLength }) {
-  console.log({ values, solution })
   try {
     if (values && solution && values?.length === solution?.length) {
       let alerts = Array(colorsLength)
@@ -52,34 +47,17 @@ export default function getResult({ values, solution, colorsLength }) {
             counter: found.length,
           }
         })
-      console.log(
-        'When values: ',
-        values,
-        'alerts: ',
-        solution.map((el, index) => {
-          const found = solution.filter(elem => elem === index + 1)
-          return {
-            id: index + 1,
-            counter: found.length,
-          }
-        })
-      )
       let status = []
       values.forEach((value, i) => {
         const alertIndex = alerts.findIndex(elem => elem.id === value)
-        console.log('ENTRO A POSICIÓN ', i, 'CON VALUE ', value, 'ALERT INDEX ', alertIndex)
         if (alertIndex !== -1) {
           if (solution[i] === value) {
-            console.log('EL COLOR ', value, 'HA HECHO MATCH EN LA SECUENCIA EN LA POSICIÓN', i)
             status = addMatchToStatus(status, value, alerts[alertIndex].counter)
-            console.log('STATUS: ', status)
             alerts[alertIndex].counter = alerts[alertIndex].counter - 1
             return
           }
           if (solution.includes(value)) {
-            console.log('EL COLOR ', value, 'ESTÁ INCLUÍDO EN LA SECUENCIA')
             status = addIncludedToStatus(status, value, alerts[alertIndex].counter)
-            console.log('STATUS: ', status)
             alerts[alertIndex].counter = alerts[alertIndex].counter - 1
             return
           }
@@ -88,7 +66,6 @@ export default function getResult({ values, solution, colorsLength }) {
       })
       status = status.filter(elem => elem.result)
       status.sort((a, b) => a.result - b.result)
-      console.log('STATUS DENTRO DE GETRESULT ', status)
       return status.length ? status : null
     } else throw new Error('No values or solution in getResult')
   } catch (err) {

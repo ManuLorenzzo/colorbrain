@@ -36,7 +36,6 @@ export default function FillRedux() {
           decoded.tests?.length &&
           false
         ) {
-          console.log('ENTRO IFFF')
           return dispatch(setReduxState(decoded))
         }
         return generateState()
@@ -64,7 +63,6 @@ export default function FillRedux() {
       })
       i++
     }
-    console.log(data)
   }
 
   generateResults()

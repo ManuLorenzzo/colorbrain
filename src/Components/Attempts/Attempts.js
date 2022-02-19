@@ -3,7 +3,6 @@ import './Attempts.css'
 
 export default function Attempts({ test, selectedTest }) {
   if (test && !test.passed & (test.attempts > 0)) {
-    console.log('entro primer if')
     return (
       <div className={test.attempts > 2 ? 'attempts' : 'attempts attempts--warn'}>
         {test.attempts > 1 ? (

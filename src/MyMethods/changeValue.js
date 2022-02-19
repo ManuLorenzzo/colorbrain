@@ -1,5 +1,4 @@
 export default function changeValue({ i, newValue, values, selectedBubble, setSelectedBubble }) {
-  console.log('Cambio valor de burbuja', i, ' ', newValue)
   try {
     if (i >= values.length)
       throw new Error('El nuevo valor tiene un índice mayor que la longitud del array')

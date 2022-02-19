@@ -9,6 +9,7 @@ import Header from './Components/Header/Header'
 import Keyboard from './Components/Keyboard/Keyboard'
 import Display from './Components/Display/Display'
 import FillRedux from './Components/FillRedux'
+import AdSense from 'react-adsense'
 
 function App() {
   const store = generateStore()
