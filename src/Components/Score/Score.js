@@ -30,11 +30,13 @@ export default function Score({ state, test }) {
 
   const finishedTest = Boolean(test.passed || !test.attempts)
 
-  const getTestCopy = () => {
+  const getTestCopy = (showUrl = false) => {
     try {
-      let copy = `ColorBrain - ${today} - Test #${state.selectedTest + 1} ${
-        test.passed ? 'resuelto' : 'fallado'
-      } - ${test.initialAttempts - test.attempts}/${test.initialAttempts}\n`
+      let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today} - Test #${
+        state.selectedTest + 1
+      } ${test.passed ? 'resuelto' : 'fallado'} - ${test.initialAttempts - test.attempts}/${
+        test.initialAttempts
+      }\n`
       test.history.forEach(elem => {
         if (elem.result) {
           Object.values(elem.result).forEach(el => {
@@ -51,9 +53,9 @@ export default function Score({ state, test }) {
     }
   }
 
-  const getFullCopy = () => {
+  const getFullCopy = (showUrl = false) => {
     try {
-      let copy = `ColorBrain - ${today}\n\n`
+      let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today}\n\n`
       state.tests.forEach(test => {
         copy += `Test #${test.id + 1} ${test.passed ? 'resuelto' : 'fallado'} - ${
           test.initialAttempts - test.attempts
@@ -68,6 +70,7 @@ export default function Score({ state, test }) {
           copy += '\n'
         })
       })
+      copy += url
       return copy
     } catch (err) {
       console.error(err)
@@ -76,7 +79,7 @@ export default function Score({ state, test }) {
 
   if (state && test && finishedTest) {
     const copy = (all = true) => {
-      const copy = all ? getFullCopy() : getTestCopy()
+      const copy = all ? getFullCopy(true) : getTestCopy(true)
       if (copy) {
         copyToClipboard(copy)
         easyToast('success', 'Copiado a portapapeles')

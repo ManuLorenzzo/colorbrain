@@ -19,9 +19,11 @@ export default function Keyboard() {
   const hasLost = !myTest?.attempts && !myTest?.passed
 
   const vibrate = () => {
-    window.navigator.vibrate(1000)
+    window.navigator.vibrate(10)
+    setTimeout(() => {
+      window.navigator.vibrate(0)
+    }, 10)
   }
-
   const finished = Boolean(!state?.inputValues.some(elem => elem == null) && selectedBubble == null)
 
   const focusBubble = i => dispatch(setReduxSelectedBubble(i))
@@ -100,7 +102,7 @@ export default function Keyboard() {
               )
             })}
         </div>
-        {!hasLost && finished && <div className="keyboard__submit">✔</div>}
+        {!hasLost && finished && <button className="keyboard__submit">✔</button>}
       </div>
     )
   } else return <></>

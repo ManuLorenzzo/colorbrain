@@ -12,7 +12,6 @@ export default function InputRow({ state, test }) {
           editable={true}
           selectedBubble={state?.selectedBubble}
         />
-        <Result solution={test?.solution} values={state?.values} show={false} />
       </div>
     </>
   )
