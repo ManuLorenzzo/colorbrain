@@ -1,5 +1,6 @@
 import React from 'react'
 import Row from '../Row/Row'
+import Sequence from '../Sequence/Sequence'
 import './History.css'
 
 export default function History({ test }) {
@@ -12,6 +13,12 @@ export default function History({ test }) {
             <Row values={elem.values} solution={test?.solution} colorsLength={test?.colors} />
           </div>
         ))}
+        {!test.passed && !test.attempts && (
+          <div className="history__solution">
+            <div className="history__label">SOLUCIÓN</div>
+            <Sequence values={test.solution} />
+          </div>
+        )}
       </div>
     )
   } else return <></>

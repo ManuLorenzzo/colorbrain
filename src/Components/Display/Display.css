@@ -1,8 +1,8 @@
 .display {
   background: #444857;
-  padding-bottom: 4rem;
 }
 
 .display__swiper {
   min-height: 80vh;
+  padding-bottom: 4rem;
 }
