@@ -1,4 +1,4 @@
-// constantes
+  // constantes
 const initialData = {
   inputValues: [null, null, null, null],
   tests: [],

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import colors from '../../Config/colors.json'
 import changeValue from '../../MyMethods/changeValue'
@@ -8,6 +8,7 @@ import {
   setReduxSelectedBubble,
   setReduxTests,
 } from '../../Redux/Ducks/stateDuck'
+import { addReduxStatistics } from '../../Redux/Ducks/statisticsDuck'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
 
@@ -19,10 +20,12 @@ export default function Keyboard() {
   const hasLost = !myTest?.attempts && !myTest?.passed
 
   const vibrate = () => {
-    window.navigator.vibrate(10)
-    setTimeout(() => {
-      window.navigator.vibrate(0)
-    }, 10)
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(10)
+      setTimeout(() => {
+        window.navigator.vibrate(0)
+      }, 10)
+    }
   }
   const finished = Boolean(!state?.inputValues.some(elem => elem == null) && selectedBubble == null)
 
@@ -58,8 +61,19 @@ export default function Keyboard() {
     }
   }
 
+  const pushStatistics = () => {
+    let newTests = []
+    dispatch(
+      addReduxStatistics({
+        date: 'now',
+        tests: state?.tests.map(),
+      })
+    )
+  }
+
   const handleSubmit = () => {
     vibrate()
+    //pushStatistics()
     if (finished && myTest.attempts) {
       const result = getResult({
         values: state.inputValues,
@@ -80,6 +94,7 @@ export default function Keyboard() {
       dispatch(setReduxSelectedBubble(0))
     }
   }
+  console.log({ finished })
   if (!hasLost) {
     return (
       <div className="keyboard" onClick={finished ? handleSubmit : () => {}}>

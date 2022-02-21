@@ -21,6 +21,15 @@ function App() {
         <Header />
         <Display />
         <Keyboard />
+
+        <AdSense.Google
+          client="ca-pub-4668268094080615"
+          slot="7806394673"
+          style={{ display: 'block' }}
+          format="auto"
+          responsive="true"
+          layoutKey="-gw-1+2a-9x+5c"
+        />
       </div>
     </Provider>
   )

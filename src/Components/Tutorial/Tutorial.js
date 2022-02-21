@@ -13,7 +13,7 @@ export default function Tutorial() {
   ]
 
   const Try = ({ label, value }) => (
-    <div>
+    <div className="tutorial__row">
       <div className="tutorial__label">{label}</div>
       <div className="row">
         <Sequence values={value} />

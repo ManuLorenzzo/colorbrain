@@ -37,6 +37,10 @@
   padding-bottom: 1rem;
 }
 
+.tutorial__solution .sequence {
+  margin-right: 4.6rem;
+}
+
 .tutorial__example .bubble {
   width: 3rem;
   height: 3rem;
@@ -48,7 +52,6 @@
 
 .tutorial__example .row {
   padding: 0;
-  margin-left: 4.6rem;
 }
 
 .tutorial__response-container {

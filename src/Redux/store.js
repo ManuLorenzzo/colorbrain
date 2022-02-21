@@ -2,16 +2,14 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import stateReducer from './Ducks/stateDuck'
+import statisticsReducer from './Ducks/statisticsDuck'
 
 const allReducers = combineReducers({
   state: stateReducer,
+  statistics: statisticsReducer,
 })
 
 const rootReducer = (state, action) => {
-  if (action.type === 'LOGOUT') {
-    state = undefined
-  }
-
   return allReducers(state, action)
 }
 
