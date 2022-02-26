@@ -22,9 +22,12 @@ export default function Display() {
 
   const onSlideChange = swiper => {
     dispatch(setReduxSelectedTest(swiper?.activeIndex))
-    dispatch(
-      setReduxInputValues([...Array(state?.tests[swiper?.activeIndex]?.inputs || 4)].fill(null))
-    )
+    const nextUnsolvedTest = state?.tests?.find(elem => !elem.passed && elem.attempts)
+    if (state?.inputValues?.length !== nextUnsolvedTest?.inputs) {
+      dispatch(
+        setReduxInputValues([...Array(state?.tests[swiper?.activeIndex]?.inputs || 4)].fill(null))
+      )
+    }
   }
 
   useEffect(() => {

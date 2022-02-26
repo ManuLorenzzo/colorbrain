@@ -1,0 +1,74 @@
+.statistics {
+  color: var(--secondary-color);
+}
+
+.statistics__cards {
+  width: 95%;
+  margin: auto;
+  border-radius: 0.6rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: white;
+
+  display: grid;
+  grid-template-columns: [x0] 1fr [x1] 1fr [x2];
+  gap: 0.4rem;
+}
+
+.statistics__card {
+  background: var(--background-color);
+  border-radius: 0.4rem;
+  padding: 0.8rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.statistics__card:last-child {
+  grid-column: x0 / x2;
+}
+
+.statistics__card div:first-child {
+  font-size: 1.6rem;
+  color: white;
+}
+
+.statistics__charts {
+  border-top: 0.15rem dashed var(--background-color);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.stadistics__test-selected {
+  width: 95%;
+  margin: auto;
+  background: var(--background-color);
+  padding: 1rem;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.7rem;
+}
+
+.statistics__chart h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: white;
+}
+.statistics__chart h5 {
+  margin: 0;
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.statistics__chart h6 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}

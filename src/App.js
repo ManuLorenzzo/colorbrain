@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import generateStore from './Redux/store'
 import './App.css'
@@ -7,11 +7,22 @@ import Header from './Components/Header/Header'
 import Keyboard from './Components/Keyboard/Keyboard'
 import Display from './Components/Display/Display'
 import FillRedux from './Components/FillRedux'
-import AdSense from 'react-adsense'
+import ReactGA from 'react-ga'
 
 function App() {
   const store = generateStore()
-  // INICIALIZA AOS
+
+  ReactGA.initialize('UA-221029271-1')
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search)
+    ReactGA.event({
+      category: 'Test',
+      action: `Testing`,
+      nonInteraction: true,
+    })
+  })
+
   return (
     <Provider store={store}>
       <EasyToastContainer />
@@ -21,15 +32,6 @@ function App() {
         <Header />
         <Display />
         <Keyboard />
-
-        <AdSense.Google
-          client="ca-pub-4668268094080615"
-          slot="7806394673"
-          style={{ display: 'block' }}
-          format="auto"
-          responsive="true"
-          layoutKey="-gw-1+2a-9x+5c"
-        />
       </div>
     </Provider>
   )

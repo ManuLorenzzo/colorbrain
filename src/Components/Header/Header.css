@@ -33,7 +33,16 @@ header {
   height: 100%;
 }
 
-.header__info {
+.header__icons {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__icons > div {
+  cursor: pointer;
   height: 1.7rem;
   width: 1.7rem;
 }

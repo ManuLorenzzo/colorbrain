@@ -30,15 +30,21 @@
     <meta name="theme-color" content="#444857" />
 
     <link rel="manifest" crossorigin="use-credentials" href="%PUBLIC_URL%/manifest.json" />
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4668268094080615"
-      crossorigin="anonymous"
-    ></script>
     <title>ColorBrain</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-221029271-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+    function gtag() {
+      dataLayer.push(arguments)
+    }
+    gtag('js', new Date())
+
+    gtag('config', 'UA-221029271-1')
+  </script>
 </html>

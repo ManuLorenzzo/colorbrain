@@ -6,11 +6,14 @@ import getResult from '../../MyMethods/getResult'
 import {
   setReduxInputValues,
   setReduxSelectedBubble,
+  setReduxShowStatistics,
   setReduxTests,
 } from '../../Redux/Ducks/stateDuck'
 import { addReduxStatistics } from '../../Redux/Ducks/statisticsDuck'
 import Bubble from '../Bubble/Bubble'
 import './Keyboard.css'
+import ReactGA from 'react-ga'
+import moment from 'moment'
 
 export default function Keyboard() {
   const state = useSelector(store => store.state)
@@ -62,18 +65,16 @@ export default function Keyboard() {
   }
 
   const pushStatistics = () => {
-    let newTests = []
     dispatch(
       addReduxStatistics({
-        date: 'now',
-        tests: state?.tests.map(),
+        date: moment().add(4, 'days').format('YYYY-MM-DD'),
+        tests: state?.tests,
       })
     )
   }
 
   const handleSubmit = () => {
     vibrate()
-    //pushStatistics()
     if (finished && myTest.attempts) {
       const result = getResult({
         values: state.inputValues,
@@ -81,12 +82,22 @@ export default function Keyboard() {
         colorsLength: myTest.colors,
       })
       let testsCopy = JSON.parse(JSON.stringify(state.tests))
+      const passed = Boolean(JSON.stringify(state.inputValues) === JSON.stringify(myTest.solution))
 
       testsCopy[state.selectedTest] = {
         ...myTest,
         history: [...myTest.history, { values: state.inputValues, result }],
         attempts: myTest.attempts - 1,
-        passed: Boolean(JSON.stringify(state.inputValues) === JSON.stringify(myTest.solution)),
+        passed,
+      }
+      if (
+        (!passed && myTest.attempts - 1 < 1) ||
+        (passed && state?.tests?.filter(test => !test.passed)?.length === 1)
+      ) {
+        pushStatistics()
+        setTimeout(() => {
+          dispatch(setReduxShowStatistics(true))
+        }, 2000)
       }
 
       dispatch(setReduxTests(testsCopy))
@@ -94,8 +105,7 @@ export default function Keyboard() {
       dispatch(setReduxSelectedBubble(0))
     }
   }
-  console.log({ finished })
-  if (!hasLost) {
+  if (!hasLost && !myTest?.passed) {
     return (
       <div className="keyboard" onClick={finished ? handleSubmit : () => {}}>
         <div className="keyboard__bubbles">

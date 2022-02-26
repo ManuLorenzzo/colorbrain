@@ -30,3 +30,14 @@ export const addReduxStatistics = data => (dispatch, getState) => {
     console.error(err)
   }
 }
+
+export const setReduxStatistics = data => dispatch => {
+  try {
+    dispatch({
+      type: SET_STATISTICS_SUCCESS,
+      payload: data,
+    })
+  } catch (err) {
+    console.error(err)
+  }
+}
