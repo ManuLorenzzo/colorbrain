@@ -93,17 +93,21 @@ export default function FillRedux() {
   useEffect(() => {
     try {
       const interval = setInterval(() => {
-        const now = moment()
+        const now = moment().set({
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+        })
         if (now.hour() === 0 && now.minutes() === 0 && now.seconds() === 0) {
-          window.location.reload()
+          dispatch(setReduxTests([]))
         }
-      }, 1000)
+      }, 5000)
 
       return () => clearInterval(interval)
     } catch (err) {
       console.error(err)
     }
-  }, [])
+  }, [dispatch])
 
   /*
   const generateResults = () => {
