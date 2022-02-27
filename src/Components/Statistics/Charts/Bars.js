@@ -18,8 +18,7 @@ export default function BarsChart({ data }) {
           data={data}
           margin={{
             top: 20,
-            right: 30,
-            left: 20,
+            right: 55,
             bottom: 5,
           }}
           maxBarSize={50}

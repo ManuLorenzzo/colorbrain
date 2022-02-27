@@ -18,9 +18,7 @@ export default function statisticsReducer(state = initialData, action) {
 
 export const addReduxStatistics = data => (dispatch, getState) => {
   let currentState = getState()?.statistics
-  console.log({ currentState }, 'before')
   currentState.push(data)
-  console.log({ currentState }, 'after')
   try {
     dispatch({
       type: currentState,

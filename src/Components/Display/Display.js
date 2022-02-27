@@ -19,6 +19,7 @@ export default function Display() {
   const state = useSelector(store => store.state)
   const dispatch = useDispatch()
   const test = state?.tests[state.selectedTest]
+  const swiper = document.querySelector('.swiper')?.swiper
 
   const onSlideChange = swiper => {
     dispatch(setReduxSelectedTest(swiper?.activeIndex))
@@ -34,7 +35,6 @@ export default function Display() {
     try {
       if (state?.scrollTo) {
         if (state.tests.find(elem => elem.id === state.scrollTo)) {
-          const swiper = document.querySelector('.swiper')?.swiper
           swiper?.slideNext()
           dispatch(setReduxScrollTo(null))
         }
@@ -43,11 +43,22 @@ export default function Display() {
       console.error(err)
       easyToast('error', 'Ha ocurrido un error, deslice a la izquierda manualmente')
     }
-  }, [state?.scrollTo, dispatch, state.tests])
+  }, [state?.scrollTo, dispatch, state.tests, swiper])
+
+  useEffect(() => {
+    if (swiper?.activeIndex !== state?.selectedTest) {
+      swiper?.slideTo(state?.selectedTest)
+    }
+  }, [swiper, state?.selectedTest])
 
   return (
     <section className="display">
-      <Swiper spaceBetween={50} slidesPerView={1} onSlideChange={swiper => onSlideChange(swiper)}>
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={1}
+        onSlideChange={swiper => onSlideChange(swiper)}
+        initialSlide={state?.selectedTest}
+      >
         {state?.tests
           ?.filter((test, i) => test.id === 0 || test.passed || state.tests[i - 1]?.passed)
           .map((elem, i) => {

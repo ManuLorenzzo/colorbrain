@@ -2,58 +2,79 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import tests from '../Config/tests.json'
 import { setReduxState, setReduxTests } from '../Redux/Ducks/stateDuck'
+import { setReduxStatistics } from '../Redux/Ducks/statisticsDuck'
 import { Buffer } from 'buffer'
-import { addReduxStatistics, setReduxStatistics } from '../Redux/Ducks/statisticsDuck'
+import data from '../Config/data.json'
+import moment from 'moment'
 
 export default function FillRedux() {
   const redux = useSelector(store => store)
   const reduxState = redux?.state
+  const nowDate = moment().format('YYYY-MM-DD')
 
   const dispatch = useDispatch()
   useEffect(() => {
-    const generateState = () =>
+    const getTodaysResults = () => {
+      try {
+        const results = data?.find(elem => elem.date === nowDate)?.results
+        if (!results || !results.length) throw Error('No results found')
+        return results
+      } catch (err) {
+        console.error(err)
+        return [
+          [4, 2, 2, 1],
+          [3, 1, 1, 5],
+          [4, 5, 5, 6, 4],
+        ]
+      }
+    }
+    const generateState = () => {
+      const results = getTodaysResults()
       dispatch(
         setReduxTests(
-          tests?.map(elem => {
+          tests?.map((elem, i) => {
             return {
               ...elem,
               history: [],
               passed: false,
               initialAttempts: elem.attempts,
-              solution: [...Array(elem.inputs)]
-                .fill(null)
-                .map(el => Math.ceil(Math.random() * elem.colors)),
+              solution: results[i],
+              date: moment().format('YYYY-MM-DD'),
             }
           })
         )
       )
-    if (reduxState && !reduxState.tests?.length) {
-      const storage = window.localStorage.getItem('data')
-      if (storage) {
-        const decoded = JSON.parse(Buffer.from(storage, 'base64')?.toString('ascii') || '{}')
-        if (
-          decoded &&
-          typeof decoded === 'object' &&
-          Object.keys(decoded).length &&
-          decoded.tests?.length
-        ) {
-          return dispatch(setReduxState(decoded))
-        }
-        return generateState()
-      }
-      generateState()
-    } else {
-      window.localStorage.setItem(
-        'data',
-        Buffer.from(JSON.stringify(reduxState)).toString('base64')
-      )
     }
-  }, [dispatch, reduxState])
+    try {
+      if (reduxState && !reduxState.tests?.length) {
+        const storage = window.localStorage.getItem('data')
+        if (storage) {
+          const decoded = JSON.parse(Buffer.from(storage, 'base64')?.toString('ascii') || '{}')
+          if (
+            decoded &&
+            typeof decoded === 'object' &&
+            Object.keys(decoded).length &&
+            decoded.tests?.length &&
+            decoded.tests[0].date === nowDate
+          ) {
+            return dispatch(setReduxState(decoded))
+          }
+          return generateState()
+        }
+        generateState()
+      } else {
+        window.localStorage.setItem(
+          'data',
+          Buffer.from(JSON.stringify(reduxState)).toString('base64')
+        )
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }, [dispatch, reduxState, nowDate])
 
   useEffect(() => {
-    console.log('USE EFFECT')
     if (redux.statistics && !redux.statistics.length) {
-      console.log('entro if 1')
       const storage = window.localStorage.getItem('statistics')
       if (storage) {
         const decoded = JSON.parse(Buffer.from(storage, 'base64')?.toString('ascii') || '{}')
@@ -62,13 +83,27 @@ export default function FillRedux() {
         }
       }
     } else {
-      console.log('entro if 2')
       window.localStorage.setItem(
         'statistics',
         Buffer.from(JSON.stringify(redux.statistics)).toString('base64')
       )
     }
   }, [dispatch, redux])
+
+  useEffect(() => {
+    try {
+      const interval = setInterval(() => {
+        const now = moment()
+        if (now.hour() === 0 && now.minutes() === 0 && now.seconds() === 0) {
+          window.location.reload()
+        }
+      }, 1000)
+
+      return () => clearInterval(interval)
+    } catch (err) {
+      console.error(err)
+    }
+  }, [])
 
   /*
   const generateResults = () => {

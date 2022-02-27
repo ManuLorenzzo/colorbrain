@@ -18,6 +18,10 @@
   gap: 0.5rem;
 }
 
+.score__slide {
+  color: var(--background-color);
+}
+
 .score__left {
   width: 20%;
   display: flex;
@@ -43,6 +47,7 @@
   flex-flow: column nowrap;
   align-items: center;
   gap: 1rem;
+  font-weight: 500;
 }
 
 .score__btns {

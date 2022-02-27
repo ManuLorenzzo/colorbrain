@@ -34,9 +34,9 @@ export default function Score({ state, test }) {
     try {
       let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today} - Test #${
         state.selectedTest + 1
-      } ${test.passed ? 'resuelto' : 'fallado'} - ${test.initialAttempts - test.attempts}/${
-        test.initialAttempts
-      }\n`
+      } ${test.passed ? 'resuelto' : 'fallado'} - ${
+        !test.attempts && !test.passed ? 'X' : test.initialAttempts - test.attempts
+      }/${test.initialAttempts}\n`
       test.history.forEach(elem => {
         if (elem.result) {
           Object.values(elem.result).forEach(el => {
@@ -58,7 +58,7 @@ export default function Score({ state, test }) {
       let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today}\n\n`
       state.tests.forEach(test => {
         copy += `Test #${test.id + 1} ${test.passed ? 'resuelto' : 'fallado'} - ${
-          test.initialAttempts - test.attempts
+          !test.attempts && !test.passed ? 'X' : test.initialAttempts - test.attempts
         }/${test.initialAttempts}\n`
         test.history.forEach(elem => {
           if (elem.result) {
@@ -100,6 +100,9 @@ export default function Score({ state, test }) {
                 ¡Genial! Has resuelto el test <b>#{state.selectedTest + 1}</b> en{' '}
                 <b>{test.history.length}</b> {test.history.length > 1 ? 'intentos' : 'intento'}
               </span>
+            )}
+            {(!remainingTests || !test.passed) && (
+              <span className="score__slide">Desliza para ver los otros tests</span>
             )}
             <div className="score__btns">
               <div className="btn" onClick={() => copy(false)}>

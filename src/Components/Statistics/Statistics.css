@@ -44,6 +44,32 @@
   padding-top: 1rem;
 }
 
+.statistics__finished,
+.statistics__finished--lost {
+  margin: auto;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  background: #9fdeaf;
+  color: white;
+  font-weight: 500;
+  width: 95%;
+}
+
+.statistics__finished--lost {
+  background: var(--error-color);
+}
+
+.statistics__no-values {
+  padding: 1rem;
+  border-radius: 0.4rem;
+  border: 0.15rem dashed var(--error-color);
+  color: var(--error-color);
+  width: 95%;
+  margin: auto;
+  font-weight: 500;
+}
+
 .stadistics__test-selected {
   width: 95%;
   margin: auto;
