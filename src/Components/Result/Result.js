@@ -24,7 +24,7 @@ export default function Result({ solution, values, colorsLength, show = true }) 
         state &&
         state.length > 0 &&
         state.map((elem, i) => (
-          <div className="result__elem">
+          <div className="result__elem" key={i}>
             <motion.div
               key={i}
               className="result__border"

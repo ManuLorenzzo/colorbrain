@@ -46,7 +46,7 @@ export default function Clock() {
           Próximo <b>ColorBrain</b> en
         </div>
         <span>
-          {time.hours && time.hours !== 0 && `${time.hours}h`}{' '}
+          {time.hours !== 0 && `${time.hours}h`}{' '}
           {time.minutes !== 0 && time.minutes !== 60 && `${time.minutes}m`}{' '}
           {time.seconds !== 0 && time.seconds !== 60 && `${time.seconds}s`}
         </span>

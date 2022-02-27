@@ -64,11 +64,12 @@ export default function Keyboard() {
     }
   }
 
-  const pushStatistics = () => {
+  const pushStatistics = tests => {
+    console.log('entro push statistics')
     dispatch(
       addReduxStatistics({
-        date: moment().add(4, 'days').format('YYYY-MM-DD'),
-        tests: state?.tests,
+        date: moment().format('YYYY-MM-DD'),
+        tests,
       })
     )
   }
@@ -90,11 +91,14 @@ export default function Keyboard() {
         attempts: myTest.attempts - 1,
         passed,
       }
+
+      console.log(testsCopy)
+
       if (
         (!passed && myTest.attempts - 1 < 1) ||
         (passed && state?.tests?.filter(test => !test.passed)?.length === 1)
       ) {
-        pushStatistics()
+        pushStatistics(testsCopy)
         setTimeout(() => {
           dispatch(setReduxShowStatistics(true))
         }, 2000)
