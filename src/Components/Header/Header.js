@@ -10,12 +10,26 @@ import { setReduxShowStatistics } from '../../Redux/Ducks/stateDuck'
 import Statistics from '../Statistics/Statistics'
 import moment from 'moment'
 import easyToast from '../EasyToast/easyToast'
+import CookiesPolicy from '../CookiesPolicy/CookiesPolicy'
+import PolicyModal from '../PolicyModal/PolicyModal'
+import { setReduxShowCookiesModal, setReduxShowPolicyModal } from '../../Redux/Ducks/cookiesDuck'
+import ReactGA from 'react-ga'
 
 export default function Header() {
   const [infoOpen, setInfoOpen] = useState(false)
   const redux = useSelector(store => store)
   const state = redux?.state
   const dispatch = useDispatch()
+
+  if (redux?.cookies?.data?.analytics) {
+    ReactGA.initialize('UA-221029271-1')
+  }
+
+  useEffect(() => {
+    if (redux?.cookies?.data?.analytics) {
+      ReactGA.pageview(window.location.pathname + window.location.search)
+    }
+  })
 
   useEffect(() => {
     try {
@@ -88,6 +102,19 @@ export default function Header() {
         hasCloseButton={false}
         title="Estadísticas"
         content={<Statistics data={redux?.statistics} state={state} />}
+      />
+      <Modal
+        open={redux?.cookies?.showModal}
+        onClose={() => dispatch(setReduxShowCookiesModal(false))}
+        content={<PolicyModal />}
+        buttons={false}
+        closeOnOverlay={false}
+      />
+      <Modal
+        open={redux?.cookies?.showPolicyModal}
+        onClose={() => dispatch(setReduxShowPolicyModal(false))}
+        content={<CookiesPolicy />}
+        hasCloseButton={false}
       />
     </>
   )

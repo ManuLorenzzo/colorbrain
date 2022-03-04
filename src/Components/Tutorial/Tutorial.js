@@ -3,8 +3,11 @@ import Result from '../Result/Result'
 import Sequence from '../Sequence/Sequence'
 import './Tutorial.css'
 import SadIcon from '../../Svg/SadIcon.svg'
+import { useDispatch } from 'react-redux'
+import { setReduxShowCookiesModal, setReduxShowPolicyModal } from '../../Redux/Ducks/cookiesDuck'
 
 export default function Tutorial() {
+  const dispatch = useDispatch()
   const solution = [2, 1, 2, 4]
   const tries = [
     [3, 1, 2, 3],
@@ -59,6 +62,12 @@ export default function Tutorial() {
         <Try label="INTENTO 1" value={tries[0]} />
         <Try label="INTENTO 2" value={tries[1]} />
         <Try label="INTENTO 3" value={tries[2]} />
+      </div>
+      <div className="tutorial__cookies">
+        <div onClick={() => dispatch(setReduxShowPolicyModal(true))}>Ver política de cookies</div>
+        <div onClick={() => dispatch(setReduxShowCookiesModal(true))}>
+          Modificar tratamiento de cookies
+        </div>
       </div>
     </section>
   )

@@ -69,10 +69,8 @@ export default function Statistics({ data, state }) {
           .forEach((elem, i) => (obj[i === tests[id].attempts ? 'X' : i + 1] = 0))
 
         data.forEach(elem => {
-          if (!elem.tests[id].passed) {
-            console.log('NO LO HA PASADO TEST ', id)
-            return (obj['X'] = obj['X'] + 1)
-          }
+          if (!elem.tests[id].passed) return (obj['X'] = obj['X'] + 1)
+
           const tries = tests[id].attempts - elem.tests[id].attempts
           if (tries === 0) obj[tests[id].attempts] = obj[tests[id].attempts] + 1
           else
@@ -116,10 +114,6 @@ export default function Statistics({ data, state }) {
       console.error(err)
     }
   }
-
-  console.log('1', barChartData(0))
-  console.log('2', barChartData(1))
-  console.log('3', barChartData(2))
 
   return (
     <section className="statistics">

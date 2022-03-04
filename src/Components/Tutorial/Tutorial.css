@@ -92,3 +92,21 @@
 .tutorial__response .result__fill {
   background: var(--background-color);
 }
+
+.tutorial__cookies {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.tutorial__cookies div {
+  padding: 0.7rem 1.3rem;
+  border-radius: 0.4rem;
+  background: var(--background-color);
+  color: white;
+  cursor: pointer;
+  pointer-events: all;
+}

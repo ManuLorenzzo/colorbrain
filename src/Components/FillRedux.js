@@ -6,6 +6,7 @@ import { setReduxStatistics } from '../Redux/Ducks/statisticsDuck'
 import { Buffer } from 'buffer'
 import data from '../Config/data.json'
 import moment from 'moment'
+import { setReduxCookieData, setReduxShowCookiesModal } from '../Redux/Ducks/cookiesDuck'
 
 export default function FillRedux() {
   const redux = useSelector(store => store)
@@ -39,7 +40,7 @@ export default function FillRedux() {
               passed: false,
               initialAttempts: elem.attempts,
               solution: results[i],
-              date: moment().format('YYYY-MM-DD'),
+              date: nowDate,
             }
           })
         )
@@ -61,6 +62,8 @@ export default function FillRedux() {
           }
           return generateState()
         }
+        generateState()
+      } else if (reduxState.tests[0]?.date !== nowDate) {
         generateState()
       } else {
         window.localStorage.setItem(
@@ -89,6 +92,30 @@ export default function FillRedux() {
       )
     }
   }, [dispatch, redux])
+
+  useEffect(() => {
+    const showModal = () => dispatch(setReduxShowCookiesModal(true))
+    try {
+      if (Object.keys(redux?.cookies.data)?.length) {
+        window.localStorage.setItem('cookiesSeen', true)
+        window.localStorage.setItem('cookiesData', JSON.stringify(redux.cookies.data))
+      }
+      if (!Object.keys(redux?.cookies.data)?.length) {
+        if (!window.localStorage.cookiesSeen) {
+          showModal()
+        } else {
+          if (window.localStorage.cookiesData) {
+            dispatch(setReduxCookieData(JSON.parse(window.localStorage.cookiesData)))
+          } else {
+            showModal()
+          }
+        }
+      }
+    } catch (err) {
+      showModal()
+      console.error(err)
+    }
+  }, [dispatch, redux?.cookies.data])
 
   useEffect(() => {
     try {

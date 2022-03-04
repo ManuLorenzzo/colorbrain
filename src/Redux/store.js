@@ -1,5 +1,6 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import cookiesReducer from './Ducks/cookiesDuck'
 
 import stateReducer from './Ducks/stateDuck'
 import statisticsReducer from './Ducks/statisticsDuck'
@@ -7,6 +8,7 @@ import statisticsReducer from './Ducks/statisticsDuck'
 const allReducers = combineReducers({
   state: stateReducer,
   statistics: statisticsReducer,
+  cookies: cookiesReducer,
 })
 
 const rootReducer = (state, action) => {

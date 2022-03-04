@@ -1,0 +1,53 @@
+.policy-modal {
+  color: var(--background-color);
+  text-align: left;
+}
+
+.policy-modal h2 {
+  text-align: center;
+}
+
+.policy-modal h3 {
+  margin: 0;
+  color: var(--gray-color);
+  font-weight: 500;
+}
+
+.policy-modal p {
+  font-weight: 400;
+}
+
+.policy-modal__config {
+  display: flex;
+  flex-flow: column nowrap;
+  border-top: 0.15rem dashed var(--secondary-color);
+  padding-top: 1rem;
+}
+
+.policy-modal__config-elem {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 0.15rem dashed var(--secondary-color);
+  padding-bottom: 1rem;
+  gap: 1rem;
+}
+
+.policy-modal .modal__btn-container {
+  gap: 2rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.policy-modal .modal__btn:last-child {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.policy-modal__show-modal {
+  color: var(--secondary-color);
+  font-weight: 700;
+  margin-bottom: 2rem;
+}

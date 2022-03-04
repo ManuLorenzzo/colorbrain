@@ -38,6 +38,7 @@ export default function Modal({
       onClose={() => onClose()}
       lockScroll
       nested
+      closeOnEscape={false}
     >
       <div className="modal">
         {(title || message || alertMessage) && (

@@ -1,0 +1,11 @@
+.cookies-policy {
+  color: #333;
+  text-align: left;
+}
+
+.cookies-policy h3,
+.cookies-policy h2 {
+  text-align: center;
+  color: var(--background-color);
+  font-weight: 500;
+}

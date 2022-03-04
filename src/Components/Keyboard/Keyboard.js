@@ -16,7 +16,9 @@ import ReactGA from 'react-ga'
 import moment from 'moment'
 
 export default function Keyboard() {
-  const state = useSelector(store => store.state)
+  const redux = useSelector(store => store)
+  const state = redux?.state
+  const cookies = redux?.cookies?.data
   const dispatch = useDispatch()
   const myTest = state?.tests[state.selectedTest]
   const selectedBubble = state?.selectedBubble
@@ -65,7 +67,6 @@ export default function Keyboard() {
   }
 
   const pushStatistics = tests => {
-    console.log('entro push statistics')
     dispatch(
       addReduxStatistics({
         date: moment().format('YYYY-MM-DD'),
@@ -92,13 +93,20 @@ export default function Keyboard() {
         passed,
       }
 
-      console.log(testsCopy)
-
       if (
         (!passed && myTest.attempts - 1 < 1) ||
         (passed && state?.tests?.filter(test => !test.passed)?.length === 1)
       ) {
         pushStatistics(testsCopy)
+        if (cookies?.analytics) {
+          ReactGA.event({
+            category: `Test`,
+            action: `Test ${myTest.id + 1}` + passed ? 'superado' : 'fallado',
+            value: passed ? myTest.attempts - 1 : myTest.initialAttempts,
+            nonInteraction: true,
+          })
+        }
+
         setTimeout(() => {
           dispatch(setReduxShowStatistics(true))
         }, 2000)
