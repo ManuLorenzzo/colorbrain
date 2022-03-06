@@ -9,9 +9,9 @@ import RadarsChart from './Charts/Radar'
 import Clock from './Clock/Clock'
 
 export default function Statistics({ data, state }) {
-  const finished =
-    !state?.tests?.some(test => !test.attempts && !test.passed) ||
-    state?.tests?.some(test => !test.attempts && !test.passed)
+  const finished = state?.tests?.some(
+    test => !test.passed && test.history.length === test.initialAttempts
+  )
   const hasLost = state?.tests?.some(test => !test.passed)
 
   const winPercent = () => {
@@ -40,18 +40,18 @@ export default function Statistics({ data, state }) {
         data.forEach(elem => {
           const date = moment(elem.date)
           if (stop) return
-          if (date.isSame(moment().format('YYYY-MM-DD'))) {
-            return
-          }
 
-          if (lastDate.subtract(1, 'days').format('YYYY-MM-DD') === date.format('YYYY-MM-DD')) {
+          if (
+            date.isSame(moment().format('YYYY-MM-DD')) ||
+            lastDate.subtract(1, 'days').format('YYYY-MM-DD') === date.format('YYYY-MM-DD')
+          ) {
             consecutive++
             return (lastDate = date)
           }
           stop = true
           return
         })
-        return consecutive
+        return consecutive === 1 ? 0 : consecutive
       }
       return 0
     } catch (err) {
