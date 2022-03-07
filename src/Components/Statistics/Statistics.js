@@ -9,9 +9,9 @@ import RadarsChart from './Charts/Radar'
 import Clock from './Clock/Clock'
 
 export default function Statistics({ data, state }) {
-  const finished = state?.tests?.some(
-    test => !test.passed && test.history.length === test.initialAttempts
-  )
+  const finished =
+    state?.tests?.some(test => !test.passed && test.history.length === test.initialAttempts) ||
+    !state?.tests?.some(test => !test.passed)
   const hasLost = state?.tests?.some(test => !test.passed)
 
   const winPercent = () => {
@@ -78,7 +78,7 @@ export default function Statistics({ data, state }) {
               obj[tests[id].attempts - elem.tests[id].attempts] + 1
         })
         return Object.entries(obj).map(([key, value]) => {
-          return { name: key, veces: value }
+          return { name: key, Porcentaje: Math.round((value * 100) / data.length) }
         })
       }
     } catch (err) {

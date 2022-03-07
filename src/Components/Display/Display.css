@@ -1,5 +1,6 @@
 .display {
   background: #444857;
+  user-select: none;
 }
 
 .display__swiper {

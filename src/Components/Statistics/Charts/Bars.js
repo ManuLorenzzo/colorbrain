@@ -25,11 +25,11 @@ export default function BarsChart({ data }) {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis allowDecimals={false} />
+          <YAxis allowDecimals={false} unit="%" />
           <Tooltip />
           <Legend />
 
-          <Bar dataKey="veces" stackId="a" fill="#444857" />
+          <Bar dataKey="Porcentaje" stackId="a" fill="#444857" />
         </BarChart>
       </ResponsiveContainer>
     )
