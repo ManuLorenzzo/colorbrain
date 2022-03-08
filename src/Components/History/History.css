@@ -19,7 +19,7 @@
 .history__solution {
   display: flex;
   flex-flow: column nowrap !important;
-  gap: 1em;
+  gap: 1rem;
   transform: scale(0.8);
   padding-right: 4rem;
   margin-top: 1rem;

@@ -28,10 +28,21 @@ export default function Tutorial() {
   return (
     <section className="tutorial">
       <div className="tutorial__description">
-        <b>Adivina la secuencia correcta de colores con tres niveles de dificultad</b>
-        <b>En la misma secuencia pueden repetirse los colores</b>
+        <span>Adivina la secuencia correcta de colores con tres niveles de dificultad diarios</span>
+        <ul>
+          <li>
+            <b>En la misma secuencia pueden repetirse los colores.</b>
+          </li>
+          <li>
+            <b>Si fallas, tendrás que esperar a las 00:00 para tener un nuevo ColorBrain.</b>
+          </li>
+          <li>
+            <b>Todo el mundo tiene las mismas soluciones. ¡Compártelo con tus amigos!</b>
+          </li>
+          <h4>¡AVISO! El orden de las respuestas no se corresponde con el orden de las burbujas</h4>
+        </ul>
         <div className="tutorial__response-container">
-          POSIBLES RESPUESTAS
+          <h3>POSIBLES RESPUESTAS</h3>
           <div className="tutorial__response">
             <div className="result__elem">
               <div className="result__border"></div>
@@ -56,8 +67,7 @@ export default function Tutorial() {
       <div className="tutorial__example">
         <h3>EJEMPLO</h3>
         <div className="tutorial__solution">
-          <div className="tutorial__label">SOLUCIÓN</div>
-          <Sequence values={solution} />
+          <Try label="SOLUCIÓN" value={solution} />
         </div>
         <Try label="INTENTO 1" value={tries[0]} />
         <Try label="INTENTO 2" value={tries[1]} />

@@ -5,7 +5,7 @@ export default function CookiesPolicy() {
   return (
     <section className="cookies-policy">
       <h2>POLÍTICA DE COOKIES</h2>
-      <h3>colorbrain.github.io</h3>
+      <h3>colorbraingame.com</h3>
       <p>
         El acceso a este Sitio Web puede implicar la utilización de cookies. Las cookies son
         pequeñas cantidades de información que se almacenan en el navegador utilizado por cada

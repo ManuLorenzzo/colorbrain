@@ -7,6 +7,30 @@
   display: flex;
   flex-flow: column nowrap;
   gap: 0.5rem;
+  text-align: left;
+}
+
+.tutorial__description ul {
+  padding-left: 2rem;
+}
+
+.tutorial__description li {
+  margin-bottom: 0.3rem;
+}
+
+.tutorial h4 {
+  margin: 0.5rem 0;
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  margin-left: -2rem;
+}
+
+.tutorial span {
+  font-weight: 500;
+  text-align: center;
+  font-size: 1.3rem;
+  color: var(--secondary-color);
 }
 
 .tutorial__example {
@@ -41,6 +65,10 @@
   margin-right: 4.6rem;
 }
 
+.tutorial__solution .sequence:first-child {
+  margin-right: 0;
+}
+
 .tutorial__example .bubble {
   width: 3rem;
   height: 3rem;
@@ -55,10 +83,11 @@
 }
 
 .tutorial__response-container {
-  border: 0.15rem var(--background-color) dashed;
+  background: var(--background-color);
   border-radius: 0.4rem;
   padding: 1rem;
   margin: 1rem auto;
+  color: white;
 
   display: flex;
   flex-flow: column nowrap;
@@ -67,6 +96,12 @@
   gap: 1rem;
 
   font-weight: 500;
+}
+
+.tutorial__response-container h3 {
+  margin: 0;
+  font-weight: 500;
+  color: var(--secondary-color);
 }
 
 .tutorial__response {
@@ -79,18 +114,6 @@
 .tutorial__response .result__elem {
   width: 2rem;
   height: 1rem;
-}
-
-.tutorial__response-container img {
-  filter: invert(100%);
-}
-
-.tutorial__response .result__border {
-  border-color: var(--background-color);
-}
-
-.tutorial__response .result__fill {
-  background: var(--background-color);
 }
 
 .tutorial__cookies {

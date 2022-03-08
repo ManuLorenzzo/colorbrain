@@ -26,7 +26,7 @@ export default function Score({ state, test }) {
   const dispatch = useDispatch()
   const remainingTests = state?.tests?.filter(test => !test.passed)?.length
   let today = moment().format('DD-MM-YYYY')
-  const url = 'colorbrain.github.io'
+  const url = 'colorbraingame.com'
 
   const finishedTest = Boolean(test.passed || !test.attempts)
 

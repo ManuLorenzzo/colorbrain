@@ -79,3 +79,10 @@
   width: 95% !important;
   border-radius: 0.6rem;
 }
+
+@media only screen and (min-width: 1200px) {
+  /*FORMATO PC*/
+  .popup-content {
+    width: 30rem !important;
+  }
+}

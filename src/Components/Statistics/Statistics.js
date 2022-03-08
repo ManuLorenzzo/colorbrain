@@ -7,11 +7,14 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import RadarsChart from './Charts/Radar'
 import Clock from './Clock/Clock'
+import useWindowDimensions from '../Hooks/useWindowDimensions'
 
 export default function Statistics({ data, state }) {
   const finished =
     state?.tests?.some(test => !test.passed && test.history.length === test.initialAttempts) ||
     !state?.tests?.some(test => !test.passed)
+  const { width } = useWindowDimensions()
+
   const hasLost = state?.tests?.some(test => !test.passed)
 
   const winPercent = () => {
@@ -152,8 +155,12 @@ export default function Statistics({ data, state }) {
                       </div>
                       <h5>Intentos</h5>
                       <BarsChart data={barChartData(i)} />
-                      <h5>Uso de cada color</h5>
-                      <RadarsChart data={radarChartData(i)} />
+                      {width < 1200 && (
+                        <>
+                          <h5>Uso de cada color</h5>
+                          <RadarsChart data={radarChartData(i)} />
+                        </>
+                      )}
                     </SwiperSlide>
                   )
                 })}

@@ -17,9 +17,11 @@ function App() {
 
       <FillRedux />
       <div className="app">
-        <Header />
-        <Display />
-        <Keyboard />
+        <div className="app-content">
+          <Header />
+          <Display />
+          <Keyboard />
+        </div>
       </div>
     </Provider>
   )

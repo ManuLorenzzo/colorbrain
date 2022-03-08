@@ -11,7 +11,7 @@
   border-top: 0.15rem solid var(--gray-color);
   overflow: hidden;
   z-index: 99;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   box-shadow: 0 -0.4rem 1.5rem rgba(0, 0, 0, 0.4);
 }
@@ -27,12 +27,4 @@
   height: 4rem;
   text-align: center;
   cursor: pointer;
-}
-
-@media only screen and (min-width: 800px) {
-  /*FORMATO PC*/
-  .keyboard__bubbles {
-    width: 60%;
-    margin: auto;
-  }
 }

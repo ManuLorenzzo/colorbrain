@@ -14,10 +14,25 @@
 }
 
 .app {
+  height: 100vh;
+  background: #6d748f;
+}
+
+.app-content {
   text-align: center;
   background: #444857;
   height: 100vh;
   position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+@media only screen and (min-width: 1200px) {
+  /*FORMATO PC*/
+  .app-content {
+    width: 35rem;
+    box-shadow: 0rem 0.2rem 3rem rgba(0, 0, 0, 0.4);
+  }
 }
 
 @font-face {
