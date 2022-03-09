@@ -11,9 +11,16 @@
   border-top: 0.15rem solid var(--gray-color);
   overflow: hidden;
   z-index: 99;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   box-shadow: 0 -0.4rem 1.5rem rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (min-width: 1200px) {
+  /*FORMATO PC*/
+  .keyboard {
+    width: 35rem;
+  }
 }
 
 .keyboard__bubbles {
