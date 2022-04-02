@@ -97,7 +97,6 @@ export default function Score({ state, test }) {
     try {
       let gameTime = null
       if (shareTimes) {
-        console.log(getGameTime())
         gameTime = getGameTime()
       }
       let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today} ${

@@ -77,7 +77,6 @@ export default function Keyboard() {
 
   const handleSubmit = () => {
     vibrate()
-    console.log('Entro submit', myTest.id, myTest.history.length)
     if (finished && myTest.attempts) {
       const result = getResult({
         values: state.inputValues,

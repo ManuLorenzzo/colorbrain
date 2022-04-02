@@ -91,7 +91,6 @@ export default function RechartPie({ data, title }) {
     [setActiveIndex]
   )
   const { width } = useWindowDimensions()
-  console.log({ data })
   return (
     <ResponsiveContainer width="99%" height={width < 800 ? 230 : 350}>
       <PieChart>
