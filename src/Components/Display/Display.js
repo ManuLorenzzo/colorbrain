@@ -69,16 +69,12 @@ export default function Display() {
               <SwiperSlide style={{ cursor: 'grab' }} key={i} className="display__swiper">
                 <div className="display__clocks">
                   <Clock
-                    label="Tiempo de juego"
+                    label="JUEGO"
                     startTime={gameStart}
                     gameClock={true}
                     tests={state?.tests}
                   />
-                  <Clock
-                    label="Tiempo de test"
-                    startTime={test?.startTime}
-                    endTime={test?.endTime}
-                  />
+                  <Clock label="TEST" startTime={test?.startTime} endTime={test?.endTime} />
                 </div>
                 <Attempts test={test} selectedTest={state?.selectedTest + 1} />
                 <History test={test} />

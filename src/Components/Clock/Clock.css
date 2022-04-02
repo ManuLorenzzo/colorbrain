@@ -11,8 +11,10 @@
   font-size: 0.9rem;
   font-weight: 500;
   box-shadow: var(--box-shadow);
+  color: var(--secondary-color);
 }
 
 .clock span {
   font-size: 1.3rem;
+  color: white;
 }
