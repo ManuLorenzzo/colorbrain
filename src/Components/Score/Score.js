@@ -74,9 +74,9 @@ export default function Score({ state, test }) {
       }
       let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today} - Test #${
         state.selectedTest + 1
-      } ${test.passed ? 'resuelto' : 'fallado'} - ${
+      } ${test.passed ? 'resuelto' : 'fallado'} ${time ? '- ' + time : ''}- ${
         !test.attempts && !test.passed ? 'X' : test.initialAttempts - test.attempts
-      }/${test.initialAttempts} ${time ? '- ' + time : ''}\n`
+      }/${test.initialAttempts}\n`
       test.history.forEach(elem => {
         if (elem.result) {
           Object.values(elem.result).forEach(el => {
@@ -107,9 +107,11 @@ export default function Score({ state, test }) {
         if (shareTimes) {
           testTime = getTestTime(test)
         }
-        copy += `Test #${test.id + 1} ${test.passed ? 'resuelto' : 'fallado'} - ${
-          !test.attempts && !test.passed ? 'X' : test.initialAttempts - test.attempts
-        }/${test.initialAttempts} ${testTime ? '- ' + testTime : ''}\n`
+        copy += `Test #${test.id + 1} ${test.passed ? 'resuelto' : 'fallado'} ${
+          testTime ? '- ' + testTime : ''
+        }- ${!test.attempts && !test.passed ? 'X' : test.initialAttempts - test.attempts}/${
+          test.initialAttempts
+        }\n`
         test.history.forEach(elem => {
           if (elem.result) {
             Object.values(elem.result).forEach(el => {
