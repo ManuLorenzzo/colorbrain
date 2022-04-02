@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useCopyToClipboard } from 'react-use'
 import './Score.css'
 import easyToast from '../EasyToast/easyToast'
@@ -21,22 +21,62 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from 'react-share'
+import Switch from 'react-switch'
+import secondsToString from '../../MyMethods/secondsToString'
+import getGameEndTime from '../../MyMethods/getGameEndTime'
+
 export default function Score({ state, test }) {
   const [clipboardState, copyToClipboard] = useCopyToClipboard()
   const dispatch = useDispatch()
+  const [shareTimes, setShareTimes] = useState(
+    window.localStorage.getItem('shareTimes') === 'true' ? true : false
+  )
   const remainingTests = state?.tests?.filter(test => !test.passed)?.length
   let today = moment().format('DD-MM-YYYY')
   const url = 'colorbraingame.com'
 
+  const switchProps = {
+    onColor: '#444857',
+    width: 40,
+    height: 20,
+  }
+
   const finishedTest = Boolean(test.passed || !test.attempts)
+
+  const getGameTime = () => {
+    try {
+      const seconds = getGameEndTime(state.tests, true)
+      if (!seconds) return null
+      return secondsToString(moment.duration(seconds * 1000))
+    } catch (err) {
+      console.err(err)
+      return null
+    }
+  }
+
+  const getTestTime = test => {
+    try {
+      if (test.startTime && test.endTime) {
+        const diff = moment(test.endTime).diff(test.startTime, 'seconds')
+        return secondsToString(moment.duration(diff * 1000))
+      }
+      return null
+    } catch (err) {
+      return ''
+    }
+  }
 
   const getTestCopy = (showUrl = false) => {
     try {
+      let time = null
+      if (shareTimes) {
+        time = getTestTime(test)
+      }
       let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today} - Test #${
         state.selectedTest + 1
       } ${test.passed ? 'resuelto' : 'fallado'} - ${
         !test.attempts && !test.passed ? 'X' : test.initialAttempts - test.attempts
-      }/${test.initialAttempts}\n`
+      }/${test.initialAttempts} ${time ? '- ' + time : ''}\n`
       test.history.forEach(elem => {
         if (elem.result) {
           Object.values(elem.result).forEach(el => {
@@ -55,11 +95,22 @@ export default function Score({ state, test }) {
 
   const getFullCopy = (showUrl = false) => {
     try {
-      let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today}\n\n`
+      let gameTime = null
+      if (shareTimes) {
+        console.log(getGameTime())
+        gameTime = getGameTime()
+      }
+      let copy = `${showUrl ? url + '\n' : ''}ColorBrain - ${today} ${
+        gameTime ? '- ' + gameTime : ''
+      }\n\n`
       state.tests.forEach(test => {
+        let testTime = null
+        if (shareTimes) {
+          testTime = getTestTime(test)
+        }
         copy += `Test #${test.id + 1} ${test.passed ? 'resuelto' : 'fallado'} - ${
           !test.attempts && !test.passed ? 'X' : test.initialAttempts - test.attempts
-        }/${test.initialAttempts}\n`
+        }/${test.initialAttempts} ${testTime ? '- ' + testTime : ''}\n`
         test.history.forEach(elem => {
           if (elem.result) {
             Object.values(elem.result).forEach(el => {
@@ -120,6 +171,17 @@ export default function Score({ state, test }) {
                     SIGUIENTE TEST
                   </div>
                 )}
+              <div className="score__switch-time">
+                <Switch
+                  {...switchProps}
+                  checked={shareTimes}
+                  onChange={() => {
+                    window.localStorage.setItem('shareTimes', !shareTimes)
+                    setShareTimes(!shareTimes)
+                  }}
+                />
+                Compartir tiempos
+              </div>
             </div>
           </div>
         </div>

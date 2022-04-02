@@ -34,6 +34,7 @@ export default function stateReducer(state = initialData, action) {
       return { ...state, scrollTo: action.payload }
     case SET_SHOW_STATISTICS_SUCCESS:
       return { ...state, showStatistics: action.payload }
+
     default:
       return state
   }

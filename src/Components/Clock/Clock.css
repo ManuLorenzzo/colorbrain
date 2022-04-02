@@ -1,0 +1,18 @@
+.clock {
+  margin: auto;
+  width: 12rem;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: var(--box-shadow);
+}
+
+.clock span {
+  font-size: 1.3rem;
+}

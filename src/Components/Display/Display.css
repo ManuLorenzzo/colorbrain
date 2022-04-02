@@ -7,3 +7,10 @@
   min-height: 80vh;
   padding-bottom: 8rem;
 }
+
+.display__clocks{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 0.9rem 0 1rem 0;
+}

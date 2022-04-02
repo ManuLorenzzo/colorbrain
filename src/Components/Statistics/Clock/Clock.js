@@ -41,7 +41,7 @@ export default function Clock() {
 
   return (
     time && (
-      <div className="clock">
+      <div className="statistics-clock">
         <div>
           Próximo <b>ColorBrain</b> en
         </div>

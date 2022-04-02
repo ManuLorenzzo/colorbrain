@@ -29,10 +29,6 @@
   font-weight: 500;
 }
 
-.statistics__card:last-child {
-  grid-column: x0 / x2;
-}
-
 .statistics__card div:first-child {
   font-size: 1.6rem;
   color: white;
@@ -79,6 +75,22 @@
   display: flex;
   flex-flow: column nowrap;
   gap: 0.7rem;
+}
+
+.statistics__average-test-time {
+  width: 95%;
+  margin: auto;
+  margin-top: 0.3rem;
+  background: var(--background-color);
+  padding: 0.9rem;
+  border-radius: 0.4rem;
+}
+
+.statistics__average-test-time span {
+  color: white;
+  font-weight: 500;
+  margin-left: 0.3rem;
+  font-size: 1.2rem;
 }
 
 .statistics__chart h3 {

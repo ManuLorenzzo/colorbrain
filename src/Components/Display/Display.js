@@ -14,12 +14,15 @@ import {
   setReduxSelectedTest,
 } from '../../Redux/Ducks/stateDuck'
 import easyToast from '../EasyToast/easyToast'
+import Clock from '../Clock/Clock'
+import getGameEndTime from '../../MyMethods/getGameEndTime'
 
 export default function Display() {
   const state = useSelector(store => store.state)
   const dispatch = useDispatch()
   const test = state?.tests[state.selectedTest]
   const swiper = document.querySelector('.swiper')?.swiper
+  const gameStart = state?.tests?.find(elem => elem.id === 0)?.startTime
 
   const onSlideChange = swiper => {
     dispatch(setReduxSelectedTest(swiper?.activeIndex))
@@ -64,6 +67,19 @@ export default function Display() {
           .map((elem, i) => {
             return (
               <SwiperSlide style={{ cursor: 'grab' }} key={i} className="display__swiper">
+                <div className="display__clocks">
+                  <Clock
+                    label="Tiempo de juego"
+                    startTime={gameStart}
+                    gameClock={true}
+                    tests={state?.tests}
+                  />
+                  <Clock
+                    label="Tiempo de test"
+                    startTime={test?.startTime}
+                    endTime={test?.endTime}
+                  />
+                </div>
                 <Attempts test={test} selectedTest={state?.selectedTest + 1} />
                 <History test={test} />
                 {!test?.passed && test?.attempts > 0 && <InputRow state={state} test={test} />}

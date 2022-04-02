@@ -1,4 +1,4 @@
-.clock {
+.statistics-clock {
   width: 95%;
   display: flex;
   flex-flow: column wrap;
@@ -13,6 +13,6 @@
   font-weight: 500;
 }
 
-.clock span {
+.statistics-clock span {
   font-size: 1.5rem;
 }

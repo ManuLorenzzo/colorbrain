@@ -41,6 +41,8 @@ export default function FillRedux() {
               initialAttempts: elem.attempts,
               solution: results[i],
               date: nowDate,
+              startTime: null,
+              endTime: null,
             }
           })
         )

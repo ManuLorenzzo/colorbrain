@@ -8,6 +8,9 @@ import 'swiper/css'
 import RadarsChart from './Charts/Radar'
 import Clock from './Clock/Clock'
 import useWindowDimensions from '../Hooks/useWindowDimensions'
+import getGameEndTime from '../../MyMethods/getGameEndTime'
+import secondsToString from '../../MyMethods/secondsToString'
+import RechartPie from './Charts/Pie'
 
 export default function Statistics({ data, state }) {
   const finished =
@@ -63,16 +66,65 @@ export default function Statistics({ data, state }) {
     }
   }
 
-  const barChartData = id => {
+  const averageTime = () => {
+    try {
+      if (data && data.length) {
+        let myData = data.filter(elem => elem.tests.some(test => test.startTime && test.endTime))
+        if (myData.length) {
+          let times = []
+          myData.forEach(elem => {
+            const gameTime = getGameEndTime(elem.tests, true)
+            if (gameTime) times.push(gameTime)
+            return
+          })
+          if (times.length) {
+            const averageTime = times.reduce((a, b) => a + b, 0) / times.length
+            const momentTime = moment.duration(averageTime * 1000)
+            return secondsToString(momentTime)
+          }
+        }
+      }
+      return '-'
+    } catch (err) {
+      console.error(err)
+      return '-'
+    }
+  }
+
+  const averageTestTime = testId => {
+    try {
+      if (data && data.length) {
+        let times = []
+        const filteredTests = data.map(elem => elem.tests.find(elem => elem.id === testId))
+        filteredTests.forEach(
+          elem =>
+            elem.startTime &&
+            elem.endTime &&
+            times.push(moment(elem.endTime).diff(elem.startTime, 'seconds'))
+        )
+        if (times.length) {
+          const averageTime = times.reduce((a, b) => a + b, 0) / times.length
+          const momentTime = moment.duration(averageTime * 1000)
+          return secondsToString(momentTime)
+        }
+      }
+      return null
+    } catch (err) {
+      console.error(err)
+      return null
+    }
+  }
+
+  const pieChartData = id => {
     try {
       if (data && data.length && id != null) {
         let obj = {}
         Array(tests[id].attempts + 1)
           .fill(null)
-          .forEach((elem, i) => (obj[i === tests[id].attempts ? 'X' : i + 1] = 0))
+          .forEach((elem, i) => (obj[i === tests[id].attempts ? 'Fallo' : i + 1] = 0))
 
         data.forEach(elem => {
-          if (!elem.tests[id].passed) return (obj['X'] = obj['X'] + 1)
+          if (!elem.tests[id].passed) return (obj['Fallo'] = obj['Fallo'] + 1)
 
           const tries = tests[id].attempts - elem.tests[id].attempts
           if (tries === 0) obj[tests[id].attempts] = obj[tests[id].attempts] + 1
@@ -80,15 +132,45 @@ export default function Statistics({ data, state }) {
             obj[tests[id].attempts - elem.tests[id].attempts] =
               obj[tests[id].attempts - elem.tests[id].attempts] + 1
         })
-        return Object.entries(obj).map(([key, value]) => {
-          return { name: key, Porcentaje: Math.round((value * 100) / data.length) }
+        let final = []
+        Object.entries(obj).forEach(([key, value]) => {
+          if (!value) return
+          final.push({ name: key, value: Math.round((value * 100) / data.length) })
         })
+        return final
       }
     } catch (err) {
       console.error(err)
       return null
     }
   }
+
+  // const barChartData = id => {
+  //   try {
+  //     if (data && data.length && id != null) {
+  //       let obj = {}
+  //       Array(tests[id].attempts + 1)
+  //         .fill(null)
+  //         .forEach((elem, i) => (obj[i === tests[id].attempts ? 'X' : i + 1] = 0))
+
+  //       data.forEach(elem => {
+  //         if (!elem.tests[id].passed) return (obj['X'] = obj['X'] + 1)
+
+  //         const tries = tests[id].attempts - elem.tests[id].attempts
+  //         if (tries === 0) obj[tests[id].attempts] = obj[tests[id].attempts] + 1
+  //         else
+  //           obj[tests[id].attempts - elem.tests[id].attempts] =
+  //             obj[tests[id].attempts - elem.tests[id].attempts] + 1
+  //       })
+  //       return Object.entries(obj).map(([key, value]) => {
+  //         return { name: key, Porcentaje: Math.round((value * 100) / data.length) }
+  //       })
+  //     }
+  //   } catch (err) {
+  //     console.error(err)
+  //     return null
+  //   }
+  // }
 
   const radarChartData = id => {
     try {
@@ -139,6 +221,10 @@ export default function Statistics({ data, state }) {
           <div>{winPercent()}%</div>
           <div>Victorias</div>
         </div>
+        <div className="statistics__card">
+          <div>{averageTime()}</div>
+          <div>Tiempo medio total</div>
+        </div>
       </div>
       {data && data.length > 0 && (
         <div className="statistics__charts">
@@ -153,8 +239,11 @@ export default function Statistics({ data, state }) {
                         <h3>TEST {i + 1}</h3>
                         <h6>Desliza para ver otros tests</h6>
                       </div>
-                      <h5>Intentos</h5>
-                      <BarsChart data={barChartData(i)} />
+                      <div className="statistics__average-test-time">
+                        Tiempo medio: <span>{averageTestTime(i)}</span>
+                      </div>
+                      <RechartPie data={pieChartData(i)} title="Intentos" />
+                      {/* <BarsChart data={barChartData(i)} /> */}
                       {width < 1200 && (
                         <>
                           <h5>Uso de cada color</h5>

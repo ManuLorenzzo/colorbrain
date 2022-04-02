@@ -77,6 +77,7 @@ export default function Keyboard() {
 
   const handleSubmit = () => {
     vibrate()
+    console.log('Entro submit', myTest.id, myTest.history.length)
     if (finished && myTest.attempts) {
       const result = getResult({
         values: state.inputValues,
@@ -93,6 +94,14 @@ export default function Keyboard() {
         passed,
       }
 
+      // Tiempos
+      if (!myTest.history.length) {
+        testsCopy[state.selectedTest].startTime = moment().valueOf()
+      } else if (myTest.attempts - 1 < 1 || passed) {
+        testsCopy[state.selectedTest].endTime = moment().valueOf()
+      }
+
+      // Si ha terminado el juego completo
       if (
         (!passed && myTest.attempts - 1 < 1) ||
         (passed && state?.tests?.filter(test => !test.passed)?.length === 1)
