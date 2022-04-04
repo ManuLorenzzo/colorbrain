@@ -242,14 +242,12 @@ export default function Statistics({ data, state }) {
                       <div className="statistics__average-test-time">
                         Tiempo medio: <span>{averageTestTime(i)}</span>
                       </div>
+                      <h5>Intentos</h5>
                       <RechartPie data={pieChartData(i)} title="Intentos" />
                       {/* <BarsChart data={barChartData(i)} /> */}
-                      {width < 1200 && (
-                        <>
-                          <h5>Uso de cada color</h5>
-                          <RadarsChart data={radarChartData(i)} />
-                        </>
-                      )}
+
+                      <h5>Uso de cada color</h5>
+                      <RadarsChart data={radarChartData(i)} />
                     </SwiperSlide>
                   )
                 })}

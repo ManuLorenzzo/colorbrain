@@ -1,82 +1,54 @@
 import React, { useCallback, useState } from 'react'
-import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import useWindowDimensions from '../../Hooks/useWindowDimensions'
 
-const renderActiveShape = (props, title) => {
+const COLORS = ['#444857', '#5B5F6C', '#737681', '#A2A4AB', '#B9BAC0', '#D0D1D5', '#E8E8EA']
+const renderCustomizedLabel = props => {
   const RADIAN = Math.PI / 180
-  const {
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    startAngle,
-    endAngle,
-    payload,
-    percent,
-    value,
-  } = props
+  const payload = props.payload
+  const { cx, cy, midAngle, outerRadius, fill, percent, value } = props
   const sin = Math.sin(-RADIAN * midAngle)
   const cos = Math.cos(-RADIAN * midAngle)
-  const sx = cx + (outerRadius + 10) * cos
-  const sy = cy + (outerRadius + 10) * sin
-  const mx = cx + (outerRadius + 15) * cos
-  const my = cy + (outerRadius + 15) * sin
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22
+  const sx = cx + (outerRadius + 5) * cos
+  const sy = cy + (outerRadius + 5) * sin
+  const mx = cx + (outerRadius + 12) * cos
+  const my = cy + (outerRadius + 12) * sin
+  const ex = mx + (cos >= 0 ? 1 : -1) * 12
   const ey = my
   const textAnchor = cos >= 0 ? 'start' : 'end'
 
   return (
+    // <text
+    //   x={x}
+    //   y={y}
+    //   fill="white"
+    //   fontWeight={500}
+    //   textAnchor={x > cx ? 'start' : 'end'}
+    //   dominantBaseline="left"
+    // >
+    //   {`${(percent * 100).toFixed(0)}%`}
+    // </text>
     <g>
-      <text x={cx} y={cy - 10} dy={8} textAnchor="middle" fill="#9c9c9c" fontWeight={500}>
-        {title}
+      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+      <text
+        x={ex + (cos >= 0 ? 1 : -1) * 8}
+        y={ey}
+        fontWeight={500}
+        textAnchor={textAnchor}
+        fill="#333"
+      >
+        {payload.name} {payload.name === 'Fallo' ? '' : 'intentos'}
       </text>
       <text
-        x={cx}
-        y={title ? cy + 10 : cy}
-        dy={8}
-        textAnchor="middle"
-        fill="#444857"
-        fontWeight={500}
-      >
-        {payload.name}
-      </text>
-      <Sector
-        cx={cx}
-        cy={cy}
-        innerRadius={innerRadius}
-        outerRadius={outerRadius}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        fill="#444857"
-      />
-      <Sector
-        cx={cx}
-        cy={cy}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        innerRadius={outerRadius + 6}
-        outerRadius={outerRadius + 10}
-        fill="#444857"
-      />
-      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke="#444857" fill="none" />
-      <circle cx={ex} cy={ey} r={2} fill="#444857" stroke="none" />
-      {/*<text
-        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        x={ex + (cos >= 0 ? 1 : -1) * 8}
         y={ey}
+        dy={18}
         textAnchor={textAnchor}
-        fill="#444857"
         fontWeight={500}
-  >{`${payload.name} intentos`}</text>*/}
-      <text
-        x={ex + (cos >= 0 ? 1 : -1) * 7}
-        y={ey}
-        dy={5}
-        textAnchor={textAnchor}
-        fill="#444857"
-        fontWeight={500}
+        fill="#999"
       >
-        {`${(percent * 100).toFixed(2)}%`}
+        {`${percent * 100}%`}
       </text>
     </g>
   )
@@ -91,23 +63,24 @@ export default function RechartPie({ data, title }) {
     [setActiveIndex]
   )
   const { width } = useWindowDimensions()
+
   return (
     <ResponsiveContainer width="99%" height={width < 800 ? 230 : 350}>
-      <PieChart>
+      <PieChart width={400} height={400}>
         <Pie
-          activeIndex={activeIndex}
-          activeShape={props => renderActiveShape(props, title)}
           data={data}
-          cx={width / 2.3}
-          cy={width < 800 ? 110 : 150}
-          innerRadius={width < 800 ? 50 : 90}
-          outerRadius={width < 800 ? 65 : 105}
-          fill="#9c9c9c"
+          cx={width < 1100 ? width / 2.3 : width / 9.5}
+          cy={width < 1100 ? 110 : 150}
+          labelLine={false}
+          label={renderCustomizedLabel}
+          outerRadius={width < 1100 ? 60 : 80}
+          fill="#8884d8"
           dataKey="value"
-          onMouseEnter={onPieEnter}
-          animationBegin={0}
-          animationDuration={1000}
-        />
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
       </PieChart>
     </ResponsiveContainer>
   )

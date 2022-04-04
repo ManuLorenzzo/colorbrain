@@ -32,7 +32,7 @@ export default function Score({ state, test }) {
     window.localStorage.getItem('shareTimes') === 'true' ? true : false
   )
   const remainingTests = state?.tests?.filter(test => !test.passed)?.length
-  let today = moment().format('DD-MM-YYYY')
+  let today = moment().format('DD/MM/YYYY')
   const url = 'colorbraingame.com'
 
   const switchProps = {

@@ -14,9 +14,9 @@ export default function RadarsChart({ data }) {
   return (
     <ResponsiveContainer width={'99%'} height={width / 1.5}>
       <RadarChart
-        cx={width / 2.3}
-        cy={width / 3.5}
-        outerRadius={width / 5}
+        cx={width < 1100 ? width / 2.3 : width / 9}
+        cy={width < 1100 ? width / 3.5 : width / 10}
+        outerRadius={width < 1100 ? width / 5.5 : width / 15}
         width={width / 2}
         height={width / 3}
         data={data}
