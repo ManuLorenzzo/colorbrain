@@ -48,7 +48,7 @@ const renderCustomizedLabel = props => {
         fontWeight={500}
         fill="#999"
       >
-        {`${percent * 100}%`}
+        {`${(percent * 100).toFixed(2)}%`}
       </text>
     </g>
   )
