@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import useWindowDimensions from '../../Hooks/useWindowDimensions'
 
@@ -6,13 +6,13 @@ const COLORS = ['#444857', '#5B5F6C', '#737681', '#A2A4AB', '#B9BAC0', '#D0D1D5'
 const renderCustomizedLabel = props => {
   const RADIAN = Math.PI / 180
   const payload = props.payload
-  const { cx, cy, midAngle, outerRadius, fill, percent, value } = props
+  const { cx, cy, midAngle, outerRadius, fill, percent } = props
   const sin = Math.sin(-RADIAN * midAngle)
   const cos = Math.cos(-RADIAN * midAngle)
-  const sx = cx + (outerRadius + 5) * cos
-  const sy = cy + (outerRadius + 5) * sin
-  const mx = cx + (outerRadius + 12) * cos
-  const my = cy + (outerRadius + 12) * sin
+  const sx = cx + (outerRadius + 8) * cos
+  const sy = cy + (outerRadius + 8) * sin
+  const mx = cx + (outerRadius + 20) * cos
+  const my = cy + (outerRadius + 20) * sin
   const ex = mx + (cos >= 0 ? 1 : -1) * 12
   const ey = my
   const textAnchor = cos >= 0 ? 'start' : 'end'
@@ -55,13 +55,6 @@ const renderCustomizedLabel = props => {
 }
 
 export default function RechartPie({ data, title }) {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const onPieEnter = useCallback(
-    (_, index) => {
-      setActiveIndex(index)
-    },
-    [setActiveIndex]
-  )
   const { width } = useWindowDimensions()
 
   return (
