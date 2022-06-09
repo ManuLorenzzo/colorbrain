@@ -23,7 +23,7 @@ export default function Statistics({ data, state }) {
   const winPercent = () => {
     try {
       if (data && data.length) {
-        const wins = data.filter(elem => elem.tests.some(test => test.passed))
+        const wins = data.filter(elem => !elem.tests.some(test => !test.passed))
         const value = (wins.length * 100) / data.length
         if (typeof value === 'number') {
           return value.toFixed(2)
@@ -112,6 +112,23 @@ export default function Statistics({ data, state }) {
     } catch (err) {
       console.error(err)
       return null
+    }
+  }
+
+  const lastDayPlayed = () => {
+    try {
+      if (data && data.length) {
+        const sorted = data.sort((a, b) => moment(b.date).valueOf() - moment(a.date).valueOf())
+        const lastDay = moment(sorted[0]?.date)
+        const diff = moment().diff(lastDay, 'days')
+        if (diff === 0) return 'Hoy'
+        if (diff > 1) return 'Hace ' + diff + ' días'
+        return 'Hace ' + diff + ' día'
+      }
+      return '-'
+    } catch (err) {
+      console.error()
+      return '-'
     }
   }
 
@@ -218,12 +235,16 @@ export default function Statistics({ data, state }) {
           <div>días consecutivos</div>
         </div>
         <div className="statistics__card">
-          <div>{winPercent()}%</div>
-          <div>Victorias</div>
+          <div>{lastDayPlayed()}</div>
+          <div>Último juego</div>
         </div>
         <div className="statistics__card">
           <div>{averageTime()}</div>
           <div>Tiempo medio total</div>
+        </div>
+        <div className="statistics__card" id="statistics__wins">
+          <div>{winPercent()}%</div>
+          <div>Victorias</div>
         </div>
       </div>
       {data && data.length > 0 && (

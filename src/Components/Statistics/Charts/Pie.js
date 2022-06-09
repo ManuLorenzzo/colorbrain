@@ -34,6 +34,7 @@ const renderCustomizedLabel = props => {
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 8}
         y={ey}
+        fontSize={13}
         fontWeight={500}
         textAnchor={textAnchor}
         fill="#333"
@@ -43,7 +44,8 @@ const renderCustomizedLabel = props => {
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 8}
         y={ey}
-        dy={18}
+        dy={10}
+        fontSize={11}
         textAnchor={textAnchor}
         fontWeight={500}
         fill="#999"

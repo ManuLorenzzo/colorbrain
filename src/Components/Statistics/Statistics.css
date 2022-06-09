@@ -29,6 +29,10 @@
   font-weight: 500;
 }
 
+#statistics__wins {
+  grid-column: x0 / x2;
+}
+
 .statistics__card div:first-child {
   font-size: 1.6rem;
   color: white;
