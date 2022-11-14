@@ -69,10 +69,18 @@ export default function Statistics({ data, state }) {
   const averageTime = () => {
     try {
       if (data && data.length) {
-        let myData = data.filter(elem => elem.tests.some(test => test.startTime && test.endTime))
-        if (myData.length) {
+        for (const day of data) {
+          for (const test of day.tests) {
+            if (test.startTime && !test.endTime) {
+              let newEndTime = moment(test.startTime)
+              newEndTime.add(1, 'seconds')
+              test.endTime = newEndTime.valueOf()
+            }
+          }
+        }
+        if (data.length) {
           let times = []
-          myData.forEach(elem => {
+          data.forEach(elem => {
             const gameTime = getGameEndTime(elem.tests, true)
             if (gameTime) times.push(gameTime)
             return

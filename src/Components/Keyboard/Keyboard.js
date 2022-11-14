@@ -92,12 +92,16 @@ export default function Keyboard() {
         attempts: myTest.attempts - 1,
         passed,
       }
-
       // Tiempos
       if (!myTest.history.length) {
         testsCopy[state.selectedTest].startTime = moment().valueOf()
-      } else if (myTest.attempts - 1 < 1 || passed) {
-        testsCopy[state.selectedTest].endTime = moment().valueOf()
+      }
+      if (myTest.attempts - 1 < 1 || passed) {
+        let endTime = moment()
+        if (!myTest.history.length) {
+          endTime.add(1, 'seconds')
+        }
+        testsCopy[state.selectedTest].endTime = endTime.valueOf()
       }
 
       // Si ha terminado el juego completo
