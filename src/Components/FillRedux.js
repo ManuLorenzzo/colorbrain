@@ -134,23 +134,23 @@ export default function FillRedux() {
     }
   }, [dispatch])
 
-  /*
-  const generateResults = () => {
-    let i = 0
-    let data = []
-    let initialDate = moment()
-    while (i < 1000) {
-      data.push({
-        date: initialDate.add(1, 'days').format('YYYY-MM-DD'),
-        results: tests?.map(elem =>
-          [...Array(elem.inputs)].fill(null).map(el => Math.ceil(Math.random() * elem.colors))
-        ),
-      })
-      i++
-    }
-  }
+  // const generateResults = () => {
+  //   let i = 0
+  //   let data = []
+  //   let initialDate = moment()
+  //   while (i < 10000) {
+  //     data.push({
+  //       date: initialDate.add(1, 'days').format('YYYY-MM-DD'),
+  //       results: tests?.map(elem =>
+  //         [...Array(elem.inputs)].fill(null).map(el => Math.ceil(Math.random() * elem.colors))
+  //       ),
+  //     })
+  //     i++
+  //   }
+  //   console.log(data)
+  // }
 
-  generateResults()
-*/
+  // generateResults()
+
   return <></>
 }
