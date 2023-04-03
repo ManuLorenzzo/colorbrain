@@ -33,7 +33,7 @@ export default function Score({ state, test }) {
   )
   const remainingTests = state?.tests?.filter(test => !test.passed)?.length
   let today = moment().format('DD/MM/YYYY')
-  const url = 'colorbraingame.com'
+  const url = 'colorbrain.github.io'
 
   const switchProps = {
     onColor: '#444857',
