@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/colorbrain.github.io/static/css/main.baba6fb6.css",
-    "main.js": "/colorbrain.github.io/static/js/main.e6a4995c.js",
-    "static/js/377.62b6d9f5.chunk.js": "/colorbrain.github.io/static/js/377.62b6d9f5.chunk.js",
-    "service-worker.js": "/colorbrain.github.io/service-worker.js",
-    "static/media/no-virus.ttf": "/colorbrain.github.io/static/media/no-virus.b6ad181d11947a97fbf4.ttf",
-    "static/media/logo.svg": "/colorbrain.github.io/static/media/logo.6b998eeba66c816e807090c2fa0d0a6d.svg",
-    "static/media/SadIcon.svg": "/colorbrain.github.io/static/media/SadIcon.949b433dab2082773d93025dd04790fd.svg",
-    "index.html": "/colorbrain.github.io/index.html",
-    "static/media/StatisticsIcon.svg": "/colorbrain.github.io/static/media/StatisticsIcon.70a519e5811143d27acb6f2c08cb2620.svg",
-    "static/media/HelpIcon.svg": "/colorbrain.github.io/static/media/HelpIcon.7cc10ec566136aefee65d758cc533b43.svg",
-    "main.baba6fb6.css.map": "/colorbrain.github.io/static/css/main.baba6fb6.css.map",
-    "main.e6a4995c.js.map": "/colorbrain.github.io/static/js/main.e6a4995c.js.map",
-    "377.62b6d9f5.chunk.js.map": "/colorbrain.github.io/static/js/377.62b6d9f5.chunk.js.map"
+    "main.css": "/colorbrain/static/css/main.6bf65495.css",
+    "main.js": "/colorbrain/static/js/main.8c5beb52.js",
+    "static/js/377.62b6d9f5.chunk.js": "/colorbrain/static/js/377.62b6d9f5.chunk.js",
+    "service-worker.js": "/colorbrain/service-worker.js",
+    "static/media/no-virus.ttf": "/colorbrain/static/media/no-virus.b6ad181d11947a97fbf4.ttf",
+    "static/media/logo.svg": "/colorbrain/static/media/logo.6b998eeba66c816e807090c2fa0d0a6d.svg",
+    "static/media/SadIcon.svg": "/colorbrain/static/media/SadIcon.949b433dab2082773d93025dd04790fd.svg",
+    "index.html": "/colorbrain/index.html",
+    "static/media/StatisticsIcon.svg": "/colorbrain/static/media/StatisticsIcon.70a519e5811143d27acb6f2c08cb2620.svg",
+    "static/media/HelpIcon.svg": "/colorbrain/static/media/HelpIcon.7cc10ec566136aefee65d758cc533b43.svg",
+    "main.6bf65495.css.map": "/colorbrain/static/css/main.6bf65495.css.map",
+    "main.8c5beb52.js.map": "/colorbrain/static/js/main.8c5beb52.js.map",
+    "377.62b6d9f5.chunk.js.map": "/colorbrain/static/js/377.62b6d9f5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.baba6fb6.css",
-    "static/js/main.e6a4995c.js"
+    "static/css/main.6bf65495.css",
+    "static/js/main.8c5beb52.js"
   ]
 }
